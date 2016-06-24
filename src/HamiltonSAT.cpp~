@@ -133,7 +133,6 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
-
 	cout << "Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
 	cout << "Clauses " << clauses << endl;
