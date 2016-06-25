@@ -46,6 +46,12 @@ vector<string> split(string str, char delimiter) {
 
 int main (int argc, char *argv[])
 {
+    double a, b;
+
+    for(unsigned i = 0; i<argc; i++) {
+    	cout << argv[i] << endl;
+    }
+
 	string root = "../";
 	ifstream infile(root+"graphs/hc-4.col");
 	string line;
