@@ -50,7 +50,7 @@ int main (int argc, char *argv[])
 		return 0;	
 	}
 
-	string root = "";
+	string root = "../../";
 	ifstream infile(root+argv[1]);
 	string line;
 
@@ -207,14 +207,23 @@ int main (int argc, char *argv[])
 	getline(resultfile, line);	
 	stringstream secondLine(line);
 	
+/*
+	for(std::map<int,pair<unsigned, unsigned>>::iterator 	iter=comp_to_desc.begin(); iter != comp_to_desc.end(); ++iter)
+	{
+	cout << "Key: " << iter->first << " Value path: "<< iter->second.first << " Value node: " << iter->second.second << endl;;
+	}
+*/
 	cout << "s SATISFIABLE" << endl;
 	cout << "v ";
 	unsigned addedNodes = 0;
 	vector<int> path;
 	while(getline(secondLine, result, ' ')) {
+		if(result == "0") {
+			break;
+		}
 		if(result.c_str()[0] != '-') {
 //			string node = result.substr(result.find(to_string(addedNodes+1))+1);
-			int node = comp_to_desc.at(atoi(result.substr(1).c_str())).second;
+			int node = comp_to_desc.at(atoi(result.c_str())).second;
 			cout << node << ' ';
 			addedNodes++;
 			if(addedNodes == circlelength-1) {

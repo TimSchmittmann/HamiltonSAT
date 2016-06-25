@@ -1,5 +1,6 @@
 #!/bin/bash
 FILES=graphs/*;
+echo "" > test.txt
 for f in $FILES;
 do 
 	echo $f >> test.txt;

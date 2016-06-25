@@ -1,4 +1,3 @@
-graphs/graph.col
 graphs/hc-10.col
 graphs/hc-11.col
 graphs/hc-12.col
@@ -11,10 +10,3 @@ graphs/hc-6.col
 graphs/hc-7.col
 graphs/hc-8.col
 graphs/hc-9.col
-graphs/homer.col
-graphs/is_hamilton1.5.col
-graphs/is_hamilton18.col
-graphs/is_hamilton4.03.col
-graphs/not_hamilton0.04.col
-graphs/nv50a296.col
-graphs/nv50a485.col

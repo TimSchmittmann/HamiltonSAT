@@ -1,15 +1,16 @@
+
 graphs/hc-10.col
 s UNSATISFIABLE
 s UNKNOWN
 graphs/hc-11.col
-s NOT VERIFIED
+s VERIFIED
 graphs/hc-12.col
-s NOT VERIFIED
+s VERIFIED
 graphs/hc-13.col
 s UNSATISFIABLE
 s UNKNOWN
 graphs/hc-14.col
-s NOT VERIFIED
+s VERIFIED
 graphs/hc-15.col
 s UNSATISFIABLE
 s UNKNOWN
@@ -27,4 +28,3 @@ s UNKNOWN
 graphs/hc-9.col
 s UNSATISFIABLE
 s UNKNOWN
-graphs/is_hamilton1.5.col
