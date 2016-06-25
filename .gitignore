@@ -1,2 +1,6 @@
 Debug/
 *~
+solvers/
+tmp/
+unused_graphs/
+

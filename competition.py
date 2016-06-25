@@ -154,6 +154,9 @@ def main( solversName, filesName, unsatInstancesList ):
 			
 			#solvingProcess = subprocess.Popen( str(call + " " +  filename).split(), shell=True, stderr=PIPE, stdout=PIPE, preexec_fn=signal.pause) # setlimits(timeout) ) #.communicate()[0]
 			GLOBALTIMEOUT = timeout
+			print "Errfile: "+str(errFile);
+			print "outFile: "+str(outFile);
+			print "call: "+str(call + " " +  filename);
 			exitCode = subprocess.call(str(call + " " +  filename).split(), stdout=outFile, stderr=errFile, preexec_fn=setlimits )
 			errFile.close()
 			outFile.close()

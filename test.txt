@@ -1,20 +1,30 @@
-graphs/graph.col
 graphs/hc-10.col
+s UNSATISFIABLE
+s UNKNOWN
 graphs/hc-11.col
+s NOT VERIFIED
 graphs/hc-12.col
+s NOT VERIFIED
 graphs/hc-13.col
+s UNSATISFIABLE
+s UNKNOWN
 graphs/hc-14.col
+s NOT VERIFIED
 graphs/hc-15.col
+s UNSATISFIABLE
+s UNKNOWN
 graphs/hc-4.col
+s VERIFIED
 graphs/hc-5.col
+s VERIFIED
 graphs/hc-6.col
+s VERIFIED
 graphs/hc-7.col
+s VERIFIED
 graphs/hc-8.col
+s UNSATISFIABLE
+s UNKNOWN
 graphs/hc-9.col
-graphs/homer.col
+s UNSATISFIABLE
+s UNKNOWN
 graphs/is_hamilton1.5.col
-graphs/is_hamilton18.col
-graphs/is_hamilton4.03.col
-graphs/not_hamilton0.04.col
-graphs/nv50a296.col
-graphs/nv50a485.col

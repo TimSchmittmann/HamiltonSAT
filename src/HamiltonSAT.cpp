@@ -46,14 +46,12 @@ vector<string> split(string str, char delimiter) {
 
 int main (int argc, char *argv[])
 {
-    double a, b;
+	if(argc < 1) {
+		return 0;	
+	}
 
-    for(unsigned i = 0; i<argc; i++) {
-    	cout << argv[i] << endl;
-    }
-
-	string root = "../";
-	ifstream infile(root+"graphs/hc-4.col");
+	string root = "";
+	ifstream infile(root+argv[1]);
 	string line;
 
 	set<pair<unsigned, unsigned>> edges;
@@ -166,17 +164,50 @@ int main (int argc, char *argv[])
 	oldclauses = clauses;
 	ss << "c Clauses " << clauses << endl;
 
-	string filename = root+"tmp/hc-4-clauses.col";
-	string resultname = root+"tmp/results.txt";
+	//string filename = root+"tmp/"+argv[1]+".clauses";
+	string strArg(argv[1]);
+	string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);	
+	string filename = "tmp/"+baseFilename+".clauses";
+	
+	string resultname = filename+".result";
 	ofstream outfile(filename);
 
-//	outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
+	outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
 	outfile << ss.rdbuf();
 	
 	outfile.close();
 
-	cout << ("minisat "+filename+" "+resultname).c_str();
 	system(("minisat -verb=2 "+filename+" "+resultname).c_str());
+	
+	ifstream resultfile(resultname);
+
+	getline(resultfile, line);
+	stringstream firstLine(line);
+	
+	string result;	
+	getline(firstLine, result, ' '); 	
+	if(result != "SAT") {
+		cout << "s UNSATISFIABLE";
+		return 20;
+	}	
+	getline(resultfile, line);	
+	stringstream secondLine(line);
+	
+	cout << "s SATISFIABLE" << endl;
+	cout << "v ";
+	unsigned addedNodes = 0;
+	vector<int> path;
+	while(getline(secondLine, result, ' ')) {
+		if(result.c_str()[0] != '-') {
+			string node = result.substr(result.find(to_string(addedNodes+1))+1);
+			cout << node << ' ';
+			addedNodes++;
+			if(addedNodes == circlelength-1) {
+				break;			
+			}	
+		}
+	} 	
+	return 10;
 	
 //	for (set<pair<unsigned,unsigned>>::iterator it=edges.begin(); it!=edges.end(); ++it)
 //		 DEBUG("From: " << it->first << " To: " << it->second);
