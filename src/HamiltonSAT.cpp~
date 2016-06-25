@@ -46,7 +46,8 @@ vector<string> split(string str, char delimiter) {
 
 int main (int argc, char *argv[])
 {
-	ifstream infile("../graphs/hc-4.col");
+	string root = "";
+	ifstream infile(root+"graphs/hc-4.col");
 	string line;
 
 	set<pair<unsigned, unsigned>> edges;
@@ -75,7 +76,7 @@ int main (int argc, char *argv[])
 
 	stringstream ss;
 
-	ss << "cond1" << endl;
+	ss << "c cond1" << endl;
 	for(unsigned v = 1; v<=nodes; v++) {
 		for(unsigned i = 1; i<=circlelength; i++) {
 			ss << i << v << ' ';
@@ -83,24 +84,30 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
-	ss << "Clause diff " << clauses-oldclauses << endl;
+	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	ss << "Clauses " << clauses << endl;
+	ss << "c Clauses " << clauses << endl;
 
-	ss << "cond2" << endl;
+	ss << "c cond2" << endl;
 	for(unsigned v = 1; v<=nodes; v++) {
-		for(unsigned i = 1; i<=circlelength-1; i++) {
+		unsigned i = 1;
+		//Allow first and last path to contain same node
+		for(unsigned j = 2; j<circlelength; j++) {
+			ss << '-' << i << v << ' ' << '-' << j << v << ' ' << 0 << endl;
+			clauses++;
+		}
+		for(i = 2; i<=circlelength-1; i++) {
 			for(unsigned j = i+1; j<=circlelength; j++) {
 				ss << '-' << i << v << ' ' << '-' << j << v << ' ' << 0 << endl;
 				clauses++;
 			}
 		}
 	}
-	ss << "Clause diff " << clauses-oldclauses << endl;
+	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	ss << "Clauses " << clauses << endl;
+	ss << "c Clauses " << clauses << endl;
 
-	ss << "cond3" << endl;
+	ss << "c cond3" << endl;
 	for(unsigned i = 1; i<=circlelength; i++) {
 		for(unsigned j = 1; j<=nodes; j++) {
 			ss << i << j << ' ';
@@ -108,11 +115,11 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
-	ss << "Clause diff " << clauses-oldclauses << endl;
+	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	ss << "Clauses " << clauses << endl;
+	ss << "c Clauses " << clauses << endl;
 
-	ss << "cond4" << endl;
+	ss << "c cond4" << endl;
 	for(unsigned i = 1; i<=circlelength; i++) {
 		for(unsigned v = 1; v<=nodes-1; v++) {
 			for(unsigned w = v+1; w<=nodes; w++) {
@@ -121,11 +128,11 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
-	ss << "Clause diff " << clauses-oldclauses << endl;
+	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	ss << "Clauses " << clauses << endl;
+	ss << "c Clauses " << clauses << endl;
 
-	ss << "cond5" << endl;
+	ss << "c cond5" << endl;
 	for(unsigned v = 1; v<=nodes; v++) {
 		for(unsigned w = 1; w<=nodes; w++) {
 			if(!mappedEdges.count(make_pair(v,w))) {
@@ -136,11 +143,11 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
-	ss << "Clause diff " << clauses-oldclauses << endl;
+	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	ss << "Clauses " << clauses << endl;
+	ss << "c Clauses " << clauses << endl;
 
-	ss << "cond6" << endl;
+	ss << "c cond6" << endl;
 	for(unsigned i=0; i<pow(2, nodes); i++) {
 		for(unsigned v=1; v<=nodes; v++) {
 			ss << (((i >> (v-1)) & 1) ? circlelength : 1) << v << ' ';
@@ -149,15 +156,15 @@ int main (int argc, char *argv[])
 		clauses++;
 	}
 
-	ss << "Clause diff " << clauses-oldclauses << endl;
+	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	ss << "Clauses " << clauses << endl;
+	ss << "c Clauses " << clauses << endl;
 
-	string filename = "../tmp/hc-4-clauses.col";
-	string resultname = "../tmp/results.txt";
+	string filename = root+"tmp/hc-4-clauses.col";
+	string resultname = root+"tmp/results.txt";
 	ofstream outfile(filename);
 
-	outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
+//	outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
 	outfile << ss.rdbuf();
 	
 	outfile.close();

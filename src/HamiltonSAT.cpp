@@ -46,7 +46,7 @@ vector<string> split(string str, char delimiter) {
 
 int main (int argc, char *argv[])
 {
-	string root = "";
+	string root = "../";
 	ifstream infile(root+"graphs/hc-4.col");
 	string line;
 
