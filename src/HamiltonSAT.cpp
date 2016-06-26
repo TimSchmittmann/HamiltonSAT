@@ -53,7 +53,6 @@ int main (int argc, char *argv[])
 	string root = "";
 	ifstream infile(root+argv[1]);
 	string line;
-
 	set<pair<unsigned, unsigned>> edges;
 	map<pair<unsigned, unsigned>, bool> mappedEdges;
 
@@ -74,6 +73,7 @@ int main (int argc, char *argv[])
 
 	}
 
+	cout << nr_of_edges << endl;
 	unsigned clauses = 0;
 	unsigned oldclauses = 0;
 	unsigned circlelength = nodes+1;
@@ -92,7 +92,7 @@ int main (int argc, char *argv[])
 
 	stringstream ss;
 	vector<string> lines;
-/*
+
 	DEBUG("cond0 ");
 	ss << "c cond0" << endl;
 	ss << desc_to_comp.at(make_pair(1, 1)) << ' ' << 0 << endl;
@@ -105,7 +105,7 @@ int main (int argc, char *argv[])
 	oldclauses = clauses;
 	DEBUG("c Clauses " << clauses);	
 	ss << "c Clauses " << clauses << endl;
-*/
+
 
 
 
@@ -197,7 +197,7 @@ int main (int argc, char *argv[])
 	ss << "c Clauses " << clauses << endl;
 	
 		
-	
+	/*
 	DEBUG("c cond6");
 
 	ss << "c cond6" << endl;
@@ -214,7 +214,7 @@ int main (int argc, char *argv[])
 	oldclauses = clauses;
 	DEBUG("c Clauses " << clauses);	
 	ss << "c Clauses " << clauses << endl;
-
+*/
 	//string filename = root+"tmp/"+argv[1]+".clauses";
 	string strArg(argv[1]);
 	string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);	
