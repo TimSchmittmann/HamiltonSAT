@@ -50,7 +50,7 @@ int main (int argc, char *argv[])
 		return 0;	
 	}
 
-	string root = "../../";
+	string root = "";
 	ifstream infile(root+argv[1]);
 	string line;
 
@@ -92,6 +92,24 @@ int main (int argc, char *argv[])
 
 	stringstream ss;
 	vector<string> lines;
+/*
+	DEBUG("cond0 ");
+	ss << "c cond0" << endl;
+	ss << desc_to_comp.at(make_pair(1, 1)) << ' ' << 0 << endl;
+	clauses++;
+	ss << desc_to_comp.at(make_pair(circlelength, 1)) << ' ' << 0 << endl;
+	clauses++;
+	
+	DEBUG("c Clause diff " << clauses-oldclauses);
+	ss << "c Clause diff " << clauses-oldclauses << endl;
+	oldclauses = clauses;
+	DEBUG("c Clauses " << clauses);	
+	ss << "c Clauses " << clauses << endl;
+*/
+
+
+
+	DEBUG("c cond1");
 
 	ss << "c cond1" << endl;
 	for(unsigned v = 1; v<=nodes; v++) {
@@ -101,10 +119,13 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
+	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
+	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
 
+	DEBUG("c cond2");
 	ss << "c cond2" << endl;
 	for(unsigned v = 1; v<=nodes; v++) {
 		unsigned i = 1;
@@ -120,10 +141,13 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
+	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
+	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
 
+	DEBUG("c cond3 ");
 	ss << "c cond3" << endl;
 	for(unsigned i = 1; i<=circlelength; i++) {
 		for(unsigned j = 1; j<=nodes; j++) {
@@ -132,10 +156,13 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
+	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
+	DEBUG("c Clauses");
 	ss << "c Clauses " << clauses << endl;
 
+	DEBUG("c cond4 ");
 	ss << "c cond4" << endl;
 	for(unsigned i = 1; i<=circlelength; i++) {
 		for(unsigned v = 1; v<=nodes-1; v++) {
@@ -145,10 +172,13 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
+	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
+	DEBUG("c Clauses");
 	ss << "c Clauses " << clauses << endl;
 
+	DEBUG("c cond5 ");
 	ss << "c cond5" << endl;
 	for(unsigned v = 1; v<=nodes; v++) {
 		for(unsigned w = 1; w<=nodes; w++) {
@@ -160,9 +190,15 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
+	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
+	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
+	
+		
+	
+	DEBUG("c cond6");
 
 	ss << "c cond6" << endl;
 	for(unsigned i=0; i<pow(2, nodes); i++) {
@@ -173,9 +209,10 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
-
+	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
+	DEBUG("c Clauses " << clauses);	
 	ss << "c Clauses " << clauses << endl;
 
 	//string filename = root+"tmp/"+argv[1]+".clauses";
@@ -192,7 +229,8 @@ int main (int argc, char *argv[])
 	outfile.close();
 
 	system(("minisat -verb=2 "+filename+" "+resultname).c_str());
-	
+	DEBUG("finished solving ");
+
 	ifstream resultfile(resultname);
 
 	getline(resultfile, line);

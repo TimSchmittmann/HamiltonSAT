@@ -28,3 +28,21 @@ s UNKNOWN
 graphs/hc-9.col
 s UNSATISFIABLE
 s UNKNOWN
+graphs/is_hamilton1.5.col
+s UNSATISFIABLE
+s UNKNOWN
+graphs/is_hamilton18.col
+s UNSATISFIABLE
+s UNKNOWN
+graphs/is_hamilton4.03.col
+s UNSATISFIABLE
+s UNKNOWN
+graphs/not_hamilton0.04.col
+s UNSATISFIABLE
+s UNKNOWN
+graphs/nv50a296.col
+s UNSATISFIABLE
+s UNKNOWN
+graphs/nv50a485.col
+s UNSATISFIABLE
+s UNKNOWN
