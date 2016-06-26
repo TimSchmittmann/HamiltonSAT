@@ -73,7 +73,6 @@ int main (int argc, char *argv[])
 
 	}
 
-	cout << nr_of_edges << endl;
 	unsigned clauses = 0;
 	unsigned oldclauses = 0;
 	unsigned circlelength = nodes+1;
@@ -97,6 +96,10 @@ int main (int argc, char *argv[])
 	ss << "c cond0" << endl;
 	ss << desc_to_comp.at(make_pair(1, 1)) << ' ' << 0 << endl;
 	clauses++;
+	foreach(unsigned i=2; i<circlelength; i++) {
+		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;			
+		clauses++;
+	}
 	ss << desc_to_comp.at(make_pair(circlelength, 1)) << ' ' << 0 << endl;
 	clauses++;
 	
@@ -106,14 +109,11 @@ int main (int argc, char *argv[])
 	DEBUG("c Clauses " << clauses);	
 	ss << "c Clauses " << clauses << endl;
 
-
-
-
 	DEBUG("c cond1");
 
 	ss << "c cond1" << endl;
-	for(unsigned v = 1; v<=nodes; v++) {
-		for(unsigned i = 1; i<=circlelength; i++) {
+	for(unsigned v = 2; v<=nodes; v++) {
+		for(unsigned i = 2; i<=circlelength-1; i++) {
 			ss << desc_to_comp.at(make_pair(i, v)) << ' ';
 		}
 		ss << 0 << endl;
@@ -127,13 +127,12 @@ int main (int argc, char *argv[])
 
 	DEBUG("c cond2");
 	ss << "c cond2" << endl;
-	for(unsigned v = 1; v<=nodes; v++) {
-		unsigned i = 1;
-		//Allow first and last path to contain same node
-		for(unsigned j = 2; j<circlelength; j++) {
-			ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(j, v)) << ' ' << 0 << endl;
-			clauses++;
-		}
+	unsigned v = 1;
+	for(unsigned v = 2; v<=nodes; v++) {
+		
+	}
+	//Here	
+	for(unsigned v = 2; v<=nodes; v++) {
 		for(i = 2; i<=circlelength-1; i++) {
 			for(unsigned j = i+1; j<=circlelength; j++) {
 				ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(j, v)) << ' ' << 0 << endl;
