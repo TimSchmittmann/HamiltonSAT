@@ -16,6 +16,8 @@
 #include <map>
 #include <bitset>
 #include <math.h>
+#include <ctime>
+#include <chrono>
 
 using namespace std;
 
@@ -50,8 +52,19 @@ int main (int argc, char *argv[])
 		return 0;	
 	}
 
-	string root = "";
+	chrono::steady_clock::time_point begin = chrono::steady_clock::now();
+	chrono::steady_clock::time_point end= chrono::steady_clock::now();
+	chrono::steady_clock::time_point stop = chrono::steady_clock::now();
+	
+  	string minisatRoot("/home/furio/HamiltonSAT/minisat/");
+	string root("/home/furio/HamiltonSAT/");
+	string strArg(argv[1]);
+	string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);	
+	string filename = "tmp/"+baseFilename+".clauses";
+	
 	ifstream infile(root+argv[1]);
+	ofstream debug("tmp/"+baseFilename+".debug");	
+
 	string line;
 	set<pair<unsigned, unsigned>> edges;
 	map<pair<unsigned, unsigned>, bool> mappedEdges;
@@ -72,6 +85,11 @@ int main (int argc, char *argv[])
 		}
 
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after parsing (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+
 
 	unsigned clauses = 0;
 	unsigned oldclauses = 0;
@@ -88,7 +106,12 @@ int main (int argc, char *argv[])
 			var++;
 		}
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after mapping (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
 
+	
 	stringstream ss;
 	vector<string> lines;
 
@@ -96,13 +119,31 @@ int main (int argc, char *argv[])
 	ss << "c cond0" << endl;
 	ss << desc_to_comp.at(make_pair(1, 1)) << ' ' << 0 << endl;
 	clauses++;
-	foreach(unsigned i=2; i<circlelength; i++) {
+	
+	//Necessary? Test it!
+	for(unsigned i=2; i<=circlelength-1; i++) {
 		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;			
 		clauses++;
 	}
+	for(unsigned v=2; v<=nodes; v++) {
+		ss << '-' << desc_to_comp.at(make_pair(1, v)) << ' ' << 0 << endl;		
+		clauses++;
+		ss << '-' << desc_to_comp.at(make_pair(circlelength, v)) << ' ' << 0 << endl;		
+		clauses++;
+	}
+	//End test
+
+
 	ss << desc_to_comp.at(make_pair(circlelength, 1)) << ' ' << 0 << endl;
+	
 	clauses++;
 	
+	end= chrono::steady_clock::now();	
+	debug << "Time after cond0 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+
+
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
@@ -119,6 +160,11 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after cond1 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
@@ -127,19 +173,20 @@ int main (int argc, char *argv[])
 
 	DEBUG("c cond2");
 	ss << "c cond2" << endl;
-	unsigned v = 1;
+
 	for(unsigned v = 2; v<=nodes; v++) {
-		
-	}
-	//Here	
-	for(unsigned v = 2; v<=nodes; v++) {
-		for(i = 2; i<=circlelength-1; i++) {
-			for(unsigned j = i+1; j<=circlelength; j++) {
+		for(unsigned i = 2; i<=circlelength-2; i++) {
+			for(unsigned j = i+1; j<=circlelength-1; j++) {
 				ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(j, v)) << ' ' << 0 << endl;
 				clauses++;
 			}
 		}
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after cond2 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
@@ -148,13 +195,19 @@ int main (int argc, char *argv[])
 
 	DEBUG("c cond3 ");
 	ss << "c cond3" << endl;
-	for(unsigned i = 1; i<=circlelength; i++) {
-		for(unsigned j = 1; j<=nodes; j++) {
-			ss << desc_to_comp.at(make_pair(i, j)) << ' ';
+	for(unsigned i = 2; i<=circlelength-1; i++) {
+		for(unsigned v = 2; v<=nodes; v++) {
+			ss << desc_to_comp.at(make_pair(i, v)) << ' ';
 		}
 		ss << 0 << endl;
 		clauses++;
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after cond3 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+
+
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
@@ -163,14 +216,20 @@ int main (int argc, char *argv[])
 
 	DEBUG("c cond4 ");
 	ss << "c cond4" << endl;
-	for(unsigned i = 1; i<=circlelength; i++) {
-		for(unsigned v = 1; v<=nodes-1; v++) {
+	for(unsigned i = 2; i<=circlelength-1; i++) {
+		for(unsigned v = 2; v<=nodes-1; v++) {
 			for(unsigned w = v+1; w<=nodes; w++) {
 				ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(i, w)) << ' ' << 0 << endl;
 				clauses++;
 			}
 		}
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after cond4 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+
+
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
@@ -189,13 +248,18 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
+	end= chrono::steady_clock::now();	
+	debug << "Time after cond5 call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+	
+
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
 	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
-	
-		
+
 	/*
 	DEBUG("c cond6");
 
@@ -215,19 +279,29 @@ int main (int argc, char *argv[])
 	ss << "c Clauses " << clauses << endl;
 */
 	//string filename = root+"tmp/"+argv[1]+".clauses";
-	string strArg(argv[1]);
-	string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);	
-	string filename = "tmp/"+baseFilename+".clauses";
 	
 	string resultname = filename+".result";
 	ofstream outfile(filename);
 
-	outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
+	//outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
 	outfile << ss.rdbuf();
 	
 	outfile.close();
 
-	system(("minisat -verb=2 "+filename+" "+resultname).c_str());
+	end= chrono::steady_clock::now();	
+	debug << "Time before solver call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+	
+
+	system((minisatRoot+"minisat -verb=0 "+filename+" "+resultname).c_str());
+	
+	end= chrono::steady_clock::now();	
+	debug << "Time after solver call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
+	stop = chrono::steady_clock::now();
+	
+	
 	DEBUG("finished solving ");
 
 	ifstream resultfile(resultname);
@@ -268,6 +342,7 @@ int main (int argc, char *argv[])
 			}	
 		}
 	} 	
+
 	return 10;
 	
 //	for (set<pair<unsigned,unsigned>>::iterator it=edges.begin(); it!=edges.end(); ++it)

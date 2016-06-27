@@ -13,7 +13,7 @@ import signal
 #
 # set the default timeout to some value
 #
-DEFAULT_TIMEOUT = 3
+DEFAULT_TIMEOUT = 10
 DEFAULT_MEMORYLIMIT = 1024*1024*1024*2
 
 
