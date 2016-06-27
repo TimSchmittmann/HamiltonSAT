@@ -56,21 +56,21 @@ int main (int argc, char *argv[])
 	chrono::steady_clock::time_point end= chrono::steady_clock::now();
 	chrono::steady_clock::time_point stop = chrono::steady_clock::now();
 	
-  	string minisatRoot("/home/furio/HamiltonSAT/minisat/");
+  	string solverRoot("/home/furio/HamiltonSAT/solvers/HamiltonSAT/bin/");
 	string root("/home/furio/HamiltonSAT/");
 	string strArg(argv[1]);
 	string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);	
-	string filename = "tmp/"+baseFilename+".clauses";
+	string filename = "/home/furio/HamiltonSAT/solvers/HamiltonSAT/tmp/"+baseFilename+".clauses";
 	
 	ifstream infile(root+argv[1]);
-	ofstream debug("tmp/"+baseFilename+".debug");	
+	ofstream debug("/home/furio/HamiltonSAT/solvers/HamiltonSAT/tmp/"+baseFilename+".debug", ofstream::out | ofstream::trunc);	
 
 	string line;
 	set<pair<unsigned, unsigned>> edges;
 	map<pair<unsigned, unsigned>, bool> mappedEdges;
 
 	unsigned nodes;
-	unsigned nr_of_edges;
+	//unsigned nr_of_edges;
 	while (getline(infile, line))
 	{
 		vector<string> tokens = split(line, ' ');
@@ -81,7 +81,7 @@ int main (int argc, char *argv[])
 			mappedEdges.insert(make_pair(p, true));
 		} else if(tokens[0][0] == 'p' && tokens.size() == 4) {
 			nodes = stoul(tokens[2]);
-			nr_of_edges = stoul(tokens[3]);
+			//nr_of_edges = stoul(tokens[3]);
 		}
 
 	}
@@ -281,7 +281,7 @@ int main (int argc, char *argv[])
 	//string filename = root+"tmp/"+argv[1]+".clauses";
 	
 	string resultname = filename+".result";
-	ofstream outfile(filename);
+	ofstream outfile(filename, ofstream::out | ofstream::trunc);
 
 	//outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
 	outfile << ss.rdbuf();
@@ -294,7 +294,7 @@ int main (int argc, char *argv[])
 	stop = chrono::steady_clock::now();
 	
 
-	system((minisatRoot+"minisat -verb=0 "+filename+" "+resultname).c_str());
+	system((solverRoot+"riss -config=Riss427 -verb=0 -quiet "+filename+" "+resultname).c_str());
 	
 	end= chrono::steady_clock::now();	
 	debug << "Time after solver call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
@@ -310,45 +310,49 @@ int main (int argc, char *argv[])
 	stringstream firstLine(line);
 	
 	string result;	
-	getline(firstLine, result, ' '); 	
-	if(result != "SAT") {
+	getline(firstLine, result); 	
+	cout << "This is the result" << result << endl;
+	if(result == "s UNSATISFIABLE") {
 		cout << "s UNSATISFIABLE";
 		return 20;
-	}	
-	getline(resultfile, line);	
-	stringstream secondLine(line);
+	} else if(result == "s SATISFIABLE") {
 	
-/*
-	for(std::map<int,pair<unsigned, unsigned>>::iterator 	iter=comp_to_desc.begin(); iter != comp_to_desc.end(); ++iter)
-	{
-	cout << "Key: " << iter->first << " Value path: "<< iter->second.first << " Value node: " << iter->second.second << endl;;
-	}
-*/
-	cout << "s SATISFIABLE" << endl;
-	cout << "v ";
-	unsigned addedNodes = 0;
-	vector<int> path;
-	while(getline(secondLine, result, ' ')) {
-		if(result == "0") {
-			break;
+		getline(resultfile, line);	
+		stringstream secondLine(line);
+	
+	/*
+		for(std::map<int,pair<unsigned, unsigned>>::iterator 	iter=comp_to_desc.begin(); iter != comp_to_desc.end(); ++iter)
+		{
+		cout << "Key: " << iter->first << " Value path: "<< iter->second.first << " Value node: " << iter->second.second << endl;;
 		}
-		if(result.c_str()[0] != '-') {
-//			string node = result.substr(result.find(to_string(addedNodes+1))+1);
-			int node = comp_to_desc.at(atoi(result.c_str())).second;
-			cout << node << ' ';
-			addedNodes++;
-			if(addedNodes == circlelength-1) {
-				break;			
-			}	
-		}
-	} 	
+	*/
+		cout << "s SATISFIABLE" << endl;
+		cout << "v ";
+		unsigned addedNodes = 0;
+		vector<int> path;
+		//Skip initial 'v'
+		getline(secondLine, result, ' ');
+		while(getline(secondLine, result, ' ')) {
+			if(result == "0") {
+				break;
+			}
+			if(result.c_str()[0] != '-') {
+	//			string node = result.substr(result.find(to_string(addedNodes+1))+1);
+				int node = comp_to_desc.at(atoi(result.c_str())).second;
+				cout << node << ' ';
+				addedNodes++;
+				if(addedNodes == circlelength-1) {
+					break;			
+				}	
+			}
+		} 	
 
-	return 10;
-	
+		return 10;
+	} else {
+		return -1;	
+	}
 //	for (set<pair<unsigned,unsigned>>::iterator it=edges.begin(); it!=edges.end(); ++it)
 //		 DEBUG("From: " << it->first << " To: " << it->second);
 
-
-	return 0;
 }
 

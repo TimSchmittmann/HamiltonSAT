@@ -1,2 +1,3 @@
-HamiltonSATV1 ./HamiltonSAT.exe 
 HamiltonSAT ./HamiltonSAT.exe 
+HamiltonSATV1 ./HamiltonSAT.exe 
+HamiltonSATV1_1 ./HamiltonSAT.exe 

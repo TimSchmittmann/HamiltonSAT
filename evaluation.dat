@@ -1,83 +1,331 @@
-instance HamiltonSATV1 HamiltonSAT 
-graphs/hc-10.col 0.01 0.0 
-graphs/hc-11.col 0.0 0.0 
-graphs/hc-12.col 0.0 0.0 
-graphs/hc-13.col 0.01 0.0 
-graphs/hc-14.col 0.0 0.01 
-graphs/hc-15.col 0.01 0.0 
-graphs/hc-20-3-1.col 0.05 0.04 
-graphs/hc-20-3-2.col 0.05 0.04 
-graphs/hc-20-3-3.col 0.02 0.02 
-graphs/hc-20-4-1.col 0.02 0.03 
-graphs/hc-20-4-2.col 0.03 0.03 
-graphs/hc-20-4-3.col 0.01 0.03 
-graphs/hc-20-5-1.col 0.02 0.02 
-graphs/hc-20-5-2.col 0.02 0.01 
-graphs/hc-20-5-3.col 0.03 0.01 
-graphs/hc-20-6-1.col 0.02 0.02 
-graphs/hc-20-6-2.col 0.03 0.02 
-graphs/hc-20-6-3.col 0.02 0.01 
-graphs/hc-20-7-1.col 0.03 0.02 
-graphs/hc-20-7-2.col 0.02 0.02 
-graphs/hc-20-7-3.col 0.02 0.02 
-graphs/hc-22-3-1.col 0.04 0.05 
-graphs/hc-22-3-2.col 0.06 0.04 
-graphs/hc-22-3-3.col 0.06 0.06 
-graphs/hc-22-4-1.col 0.02 0.04 
-graphs/hc-22-4-2.col 0.02 0.03 
-graphs/hc-22-4-3.col 0.03 0.04 
-graphs/hc-22-5-1.col 0.03 0.03 
-graphs/hc-22-5-2.col 0.03 0.03 
-graphs/hc-22-5-3.col 0.03 0.03 
-graphs/hc-22-6-1.col 0.03 0.03 
-graphs/hc-22-6-2.col 0.03 0.03 
-graphs/hc-22-6-3.col 0.02 0.03 
-graphs/hc-22-7-1.col 0.03 0.02 
-graphs/hc-22-7-2.col 0.04 0.02 
-graphs/hc-22-7-3.col 0.04 0.06 
-graphs/hc-24-3-1.col 0.08 0.04 
-graphs/hc-24-3-2.col 0.1 0.09 
-graphs/hc-24-3-3.col 0.04 0.05 
-graphs/hc-24-4-1.col 0.12 0.06 
-graphs/hc-24-4-2.col 0.1 0.11 
-graphs/hc-24-4-3.col 0.06 0.12 
-graphs/hc-24-5-1.col 0.06 0.05 
-graphs/hc-24-5-2.col 0.04 0.04 
-graphs/hc-24-5-3.col 0.04 0.03 
-graphs/hc-24-6-1.col 0.05 0.04 
-graphs/hc-24-6-2.col 0.04 0.04 
-graphs/hc-24-6-3.col 0.05 0.03 
-graphs/hc-24-7-1.col 0.04 0.03 
-graphs/hc-24-7-2.col 0.05 0.03 
-graphs/hc-24-7-3.col 0.04 0.04 
-graphs/hc-26-3-1.col 0.17 0.16 
-graphs/hc-26-3-2.col 0.08 0.12 
-graphs/hc-26-3-3.col 0.3 0.13 
-graphs/hc-26-4-1.col 0.09 0.08 
-graphs/hc-26-4-2.col 0.07 0.06 
-graphs/hc-26-4-3.col 0.06 0.05 
-graphs/hc-26-5-1.col 0.06 0.05 
-graphs/hc-26-5-2.col 0.06 0.05 
-graphs/hc-26-5-3.col 0.08 0.07 
-graphs/hc-26-6-1.col 0.06 0.05 
-graphs/hc-26-6-2.col 0.06 0.04 
-graphs/hc-26-6-3.col 0.06 0.09 
-graphs/hc-26-7-1.col 0.1 0.05 
-graphs/hc-26-7-2.col 0.05 0.05 
-graphs/hc-26-7-3.col 0.05 0.06 
-graphs/hc-28-3-1.col 0.23 0.2 
-graphs/hc-28-3-2.col 0.15 0.16 
-graphs/hc-28-3-3.col 0.24 0.17 
-graphs/hc-28-4-1.col 0.09 0.1 
-graphs/hc-28-4-2.col 0.16 0.23 
-graphs/hc-28-4-3.col 0.08 0.07 
-graphs/hc-28-5-1.col 0.08 0.07 
-graphs/hc-28-5-2.col 0.09 0.07 
-graphs/hc-28-5-3.col 0.13 0.2 
-graphs/hc-28-6-1.col 0.07 0.06 
-graphs/hc-28-6-2.col 0.15 0.07 
-graphs/hc-28-6-3.col 0.08 0.06 
-graphs/hc-28-7-1.col 0.08 0.07 
-graphs/hc-28-7-2.col 0.08 0.06 
-graphs/hc-28-7-3.col 0.07 0.07 
-graphs/hc-30-3-1.col 6.86 
+instance HamiltonSAT HamiltonSATV1 HamiltonSATV1_1 
+graphs/hc-10.col 0.0 0.0 0.0 
+graphs/hc-11.col 0.02 0.01 0.0 
+graphs/hc-12.col 0.01 0.0 0.0 
+graphs/hc-13.col 0.02 0.0 0.01 
+graphs/hc-14.col 0.02 0.01 0.0 
+graphs/hc-15.col 0.03 0.01 0.0 
+graphs/hc-20-3-1.col 0.08 0.06 0.04 
+graphs/hc-20-3-2.col 0.07 0.04 0.04 
+graphs/hc-20-3-3.col 0.07 0.02 0.01 
+graphs/hc-20-4-1.col 0.07 0.03 0.02 
+graphs/hc-20-4-2.col 0.07 0.03 0.02 
+graphs/hc-20-4-3.col 0.03 0.03 0.01 
+graphs/hc-20-5-1.col 0.09 0.02 0.02 
+graphs/hc-20-5-2.col 0.06 0.02 0.03 
+graphs/hc-20-5-3.col 0.04 0.02 0.02 
+graphs/hc-20-6-1.col 0.06 0.02 0.02 
+graphs/hc-20-6-2.col 0.04 0.02 0.02 
+graphs/hc-20-6-3.col 0.05 0.02 0.02 
+graphs/hc-20-7-1.col 0.05 0.01 0.02 
+graphs/hc-20-7-2.col 0.05 0.02 0.02 
+graphs/hc-20-7-3.col 0.05 0.02 0.02 
+graphs/hc-22-3-1.col 0.16 0.05 0.04 
+graphs/hc-22-3-2.col 0.07 0.05 0.04 
+graphs/hc-22-3-3.col 0.08 0.06 0.06 
+graphs/hc-22-4-1.col 0.07 0.03 0.04 
+graphs/hc-22-4-2.col 0.12 0.02 0.03 
+graphs/hc-22-4-3.col 0.07 0.03 0.03 
+graphs/hc-22-5-1.col 0.14 0.03 0.03 
+graphs/hc-22-5-2.col 0.06 0.03 0.03 
+graphs/hc-22-5-3.col 0.08 0.04 0.03 
+graphs/hc-22-6-1.col 0.08 0.04 0.03 
+graphs/hc-22-6-2.col 0.09 0.02 0.03 
+graphs/hc-22-6-3.col 0.11 0.03 0.03 
+graphs/hc-22-7-1.col 0.07 0.03 0.02 
+graphs/hc-22-7-2.col 0.07 0.02 0.04 
+graphs/hc-22-7-3.col 0.09 0.03 0.02 
+graphs/hc-24-3-1.col 0.15 0.04 0.05 
+graphs/hc-24-3-2.col 0.12 0.09 0.09 
+graphs/hc-24-3-3.col 0.14 0.04 0.05 
+graphs/hc-24-4-1.col 0.15 0.05 0.05 
+graphs/hc-24-4-2.col 0.12 0.1 0.1 
+graphs/hc-24-4-3.col 0.1 0.06 0.1 
+graphs/hc-24-5-1.col 0.16 0.1 0.04 
+graphs/hc-24-5-2.col 0.16 0.04 0.04 
+graphs/hc-24-5-3.col 0.11 0.04 0.04 
+graphs/hc-24-6-1.col 0.16 0.05 0.04 
+graphs/hc-24-6-2.col 0.1 0.04 0.03 
+graphs/hc-24-6-3.col 0.11 0.04 0.05 
+graphs/hc-24-7-1.col 0.18 0.05 0.04 
+graphs/hc-24-7-2.col 0.1 0.04 0.04 
+graphs/hc-24-7-3.col 0.1 0.04 0.04 
+graphs/hc-26-3-1.col 0.26 0.17 0.16 
+graphs/hc-26-3-2.col 0.25 0.08 0.12 
+graphs/hc-26-3-3.col 0.57 0.3 0.14 
+graphs/hc-26-4-1.col 0.25 0.06 0.07 
+graphs/hc-26-4-2.col 0.31 0.06 0.05 
+graphs/hc-26-4-3.col 0.15 0.06 0.05 
+graphs/hc-26-5-1.col 0.18 0.06 0.05 
+graphs/hc-26-5-2.col 0.18 0.07 0.06 
+graphs/hc-26-5-3.col 0.13 0.08 0.07 
+graphs/hc-26-6-1.col 0.22 0.06 0.06 
+graphs/hc-26-6-2.col 0.17 0.05 0.06 
+graphs/hc-26-6-3.col 0.16 0.06 0.04 
+graphs/hc-26-7-1.col 0.17 0.06 0.04 
+graphs/hc-26-7-2.col 0.12 0.04 0.04 
+graphs/hc-26-7-3.col 0.13 0.06 0.05 
+graphs/hc-28-3-1.col 0.49 0.13 0.18 
+graphs/hc-28-3-2.col 0.72 0.19 0.16 
+graphs/hc-28-3-3.col 0.63 0.23 0.15 
+graphs/hc-28-4-1.col 0.19 0.09 0.09 
+graphs/hc-28-4-2.col 0.35 0.16 0.2 
+graphs/hc-28-4-3.col 0.42 0.1 0.07 
+graphs/hc-28-5-1.col 0.39 0.09 0.07 
+graphs/hc-28-5-2.col 0.38 0.09 0.07 
+graphs/hc-28-5-3.col 0.38 0.14 0.19 
+graphs/hc-28-6-1.col 0.24 0.07 0.06 
+graphs/hc-28-6-2.col 0.16 0.07 0.07 
+graphs/hc-28-6-3.col 0.2 0.07 0.07 
+graphs/hc-28-7-1.col 0.15 0.07 0.08 
+graphs/hc-28-7-2.col 0.22 0.06 0.06 
+graphs/hc-28-7-3.col 0.21 0.07 0.06 
+graphs/hc-30-3-1.col 0.62 6.31 3.45 
+graphs/hc-30-3-2.col 0.7 0.15 0.69 
+graphs/hc-30-3-3.col 0.49 0.44 0.21 
+graphs/hc-30-4-1.col 0.39 0.08 0.1 
+graphs/hc-30-4-2.col 0.36 0.24 0.19 
+graphs/hc-30-4-3.col 0.33 0.14 0.52 
+graphs/hc-30-5-1.col 0.46 0.1 0.09 
+graphs/hc-30-5-2.col 0.57 0.12 0.13 
+graphs/hc-30-5-3.col 0.39 0.18 0.17 
+graphs/hc-30-6-1.col 0.24 0.09 0.08 
+graphs/hc-30-6-2.col 0.27 0.13 0.12 
+graphs/hc-30-6-3.col 0.31 0.09 0.09 
+graphs/hc-30-7-1.col 0.36 0.09 0.08 
+graphs/hc-30-7-2.col 0.22 0.1 0.09 
+graphs/hc-30-7-3.col 0.25 0.1 0.08 
+graphs/hc-32-3-1.col 1.64 7.2 8.12 
+graphs/hc-32-3-2.col 1.0 3.27 1.6 
+graphs/hc-32-3-3.col 1.14 2.77 6.7 
+graphs/hc-32-4-1.col 0.58 0.21 0.23 
+graphs/hc-32-4-2.col 0.55 0.69 0.67 
+graphs/hc-32-4-3.col 0.54 0.26 0.26 
+graphs/hc-32-5-1.col 0.41 0.12 0.11 
+graphs/hc-32-5-2.col 0.53 0.2 0.23 
+graphs/hc-32-5-3.col 0.35 0.23 0.25 
+graphs/hc-32-6-1.col 0.42 0.14 0.11 
+graphs/hc-32-6-2.col 0.44 0.23 0.15 
+graphs/hc-32-6-3.col 0.72 0.15 0.11 
+graphs/hc-32-7-1.col 0.56 0.17 0.15 
+graphs/hc-32-7-2.col 0.32 0.13 0.12 
+graphs/hc-32-7-3.col 0.61 0.13 0.13 
+graphs/hc-34-3-1.col 1.8 7.08 7.35 
+graphs/hc-34-3-2.col 1.6 T 6.48 
+graphs/hc-34-3-3.col 2.36 3.8 T 
+graphs/hc-34-4-1.col 1.44 1.16 1.17 
+graphs/hc-34-4-2.col 0.88 2.68 0.32 
+graphs/hc-34-4-3.col 1.62 0.28 4.5 
+graphs/hc-34-5-1.col 0.75 0.19 0.19 
+graphs/hc-34-5-2.col 0.63 0.18 0.17 
+graphs/hc-34-5-3.col 0.77 0.15 0.15 
+graphs/hc-34-6-1.col 0.7 0.15 0.14 
+graphs/hc-34-6-2.col 0.69 0.14 0.14 
+graphs/hc-34-6-3.col 0.42 0.13 0.15 
+graphs/hc-34-7-1.col 0.38 0.17 0.13 
+graphs/hc-34-7-2.col 0.5 0.14 0.14 
+graphs/hc-34-7-3.col 1.09 0.15 0.15 
+graphs/hc-36-3-1.col 3.04 T T 
+graphs/hc-36-3-2.col 1.83 3.18 3.59 
+graphs/hc-36-3-3.col 3.5 T T 
+graphs/hc-36-4-1.col 1.65 9.96 9.72 
+graphs/hc-36-4-2.col 5.8 2.5 2.46 
+graphs/hc-36-4-3.col 1.37 0.66 0.64 
+graphs/hc-36-5-1.col 0.61 0.72 0.8 
+graphs/hc-36-5-2.col 1.0 0.19 0.18 
+graphs/hc-36-5-3.col 0.81 0.17 0.16 
+graphs/hc-36-6-1.col 0.59 0.21 0.2 
+graphs/hc-36-6-2.col 0.84 0.18 0.22 
+graphs/hc-36-6-3.col 0.7 0.22 0.2 
+graphs/hc-36-7-1.col 0.44 0.18 0.15 
+graphs/hc-36-7-2.col 0.82 0.17 0.17 
+graphs/hc-36-7-3.col 1.05 0.18 0.17 
+graphs/hc-38-3-1.col 2.7 T 5.3 
+graphs/hc-38-3-2.col 2.37 8.1 8.21 
+graphs/hc-38-3-3.col 1.61 T T 
+graphs/hc-38-4-1.col 3.29 0.23 0.22 
+graphs/hc-38-4-2.col 2.59 6.76 1.53 
+graphs/hc-38-4-3.col 5.61 T T 
+graphs/hc-38-5-1.col 1.07 0.28 0.21 
+graphs/hc-38-5-2.col 1.51 0.23 0.22 
+graphs/hc-38-5-3.col 1.58 0.25 0.24 
+graphs/hc-38-6-1.col 0.95 0.26 0.27 
+graphs/hc-38-6-2.col 0.73 0.31 0.3 
+graphs/hc-38-6-3.col 0.81 0.3 0.23 
+graphs/hc-38-7-1.col 0.87 0.24 0.21 
+graphs/hc-38-7-2.col 0.83 0.22 0.2 
+graphs/hc-38-7-3.col 1.51 0.22 0.2 
+graphs/hc-40-3-1.col T 5.55 5.63 
+graphs/hc-40-3-2.col 7.83 T T 
+graphs/hc-40-3-3.col T 5.58 5.6 
+graphs/hc-40-4-1.col 1.42 0.34 T 
+graphs/hc-40-4-2.col 7.87 T 2.77 
+graphs/hc-40-4-3.col T T T 
+graphs/hc-7.col 0.00999999999999 0.0 0.0 
+graphs/hc-8.col 0.00999999999999 0.0 0.0 
+graphs/hc-9.col 0.02 0.0 0.0 
+graphs/hc-unknown-20-3-1.col 0.07 0.02 0.03 
+graphs/hc-unknown-20-3-2.col 0.08 0.23 0.21 
+graphs/hc-unknown-20-3-3.col 0.0700000000001 0.05 0.04 
+graphs/hc-unknown-20-4-1.col 0.09 0.02 0.02 
+graphs/hc-unknown-20-4-2.col 0.06 0.02 0.02 
+graphs/hc-unknown-20-4-3.col 0.06 0.02 0.02 
+graphs/hc-unknown-20-5-1.col 0.06 0.02 0.02 
+graphs/hc-unknown-20-5-2.col 0.06 0.02 0.02 
+graphs/hc-unknown-20-5-3.col 0.05 0.03 0.02 
+graphs/hc-unknown-20-6-1.col 0.04 0.02 0.02 
+graphs/hc-unknown-20-6-2.col 0.05 0.02 0.02 
+graphs/hc-unknown-20-6-3.col 0.09 0.04 0.04 
+graphs/hc-unknown-20-7-1.col 0.06 0.02 0.02 
+graphs/hc-unknown-20-7-2.col 0.07 0.02 0.02 
+graphs/hc-unknown-20-7-3.col 0.06 0.02 0.02 
+graphs/hc-unknown-22-3-1.col 0.08 0.04 0.03 
+graphs/hc-unknown-22-3-2.col 0.16 0.32 0.32 
+graphs/hc-unknown-22-3-3.col 0.11 0.49 0.5 
+graphs/hc-unknown-22-4-1.col 0.08 2.15 2.27 
+graphs/hc-unknown-22-4-2.col 0.08 0.03 0.03 
+graphs/hc-unknown-22-4-3.col 0.08 0.05 0.0400000000001 
+graphs/hc-unknown-22-5-1.col 0.11 0.0300000000001 0.03 
+graphs/hc-unknown-22-5-2.col 0.13 0.02 0.03 
+graphs/hc-unknown-22-5-3.col 0.13 0.0300000000001 0.04 
+graphs/hc-unknown-22-6-1.col 0.08 0.03 0.02 
+graphs/hc-unknown-22-6-2.col 0.26 0.04 0.0200000000001 
+graphs/hc-unknown-22-6-3.col 0.14 0.03 0.03 
+graphs/hc-unknown-22-7-1.col 0.0600000000001 0.03 0.03 
+graphs/hc-unknown-22-7-2.col 0.0700000000001 0.03 0.03 
+graphs/hc-unknown-22-7-3.col 0.0700000000001 0.03 0.02 
+graphs/hc-unknown-24-3-1.col 0.02 0.0300000000001 0.02 
+graphs/hc-unknown-24-3-2.col 0.14 0.83 1.02 
+graphs/hc-unknown-24-3-3.col 0.29 0.0700000000001 0.05 
+graphs/hc-unknown-24-4-1.col 0.13 0.0700000000001 0.0599999999999 
+graphs/hc-unknown-24-4-2.col 0.2 0.05 0.05 
+graphs/hc-unknown-24-4-3.col 0.2 0.19 0.18 
+graphs/hc-unknown-24-5-1.col 0.09 0.04 0.04 
+graphs/hc-unknown-24-5-2.col 0.1 0.0500000000001 0.04 
+graphs/hc-unknown-24-5-3.col 0.14 0.05 0.0500000000001 
+graphs/hc-unknown-24-6-1.col 0.2 0.0400000000001 0.03 
+graphs/hc-unknown-24-6-2.col 0.1 0.04 0.04 
+graphs/hc-unknown-24-6-3.col 0.12 0.0400000000001 0.03 
+graphs/hc-unknown-24-7-1.col 0.2 0.0400000000001 0.04 
+graphs/hc-unknown-24-7-2.col 0.2 0.05 0.04 
+graphs/hc-unknown-24-7-3.col 0.08 0.05 0.0300000000001 
+graphs/hc-unknown-26-3-1.col 0.2 0.21 0.15 
+graphs/hc-unknown-26-3-2.col 0.4 1.76 1.88 
+graphs/hc-unknown-26-3-3.col 0.24 0.14 0.14 
+graphs/hc-unknown-26-4-1.col 0.23 0.0699999999999 0.0700000000001 
+graphs/hc-unknown-26-4-2.col 0.18 0.09 0.09 
+graphs/hc-unknown-26-4-3.col 0.16 0.05 0.0500000000001 
+graphs/hc-unknown-26-5-1.col 0.14 0.0899999999999 0.09 
+graphs/hc-unknown-26-5-2.col 0.13 0.0600000000001 0.04 
+graphs/hc-unknown-26-5-3.col 0.28 0.0600000000001 0.0599999999999 
+graphs/hc-unknown-26-6-1.col 0.12 0.0500000000001 0.05 
+graphs/hc-unknown-26-6-2.col 0.26 0.0600000000001 0.05 
+graphs/hc-unknown-26-6-3.col 0.27 0.05 0.0500000000001 
+graphs/hc-unknown-26-7-1.col 0.14 0.0599999999999 0.0400000000001 
+graphs/hc-unknown-26-7-2.col 0.13 0.05 0.0500000000001 
+graphs/hc-unknown-26-7-3.col 0.11 0.05 0.05 
+graphs/hc-unknown-28-3-1.col 0.26 0.32 0.37 
+graphs/hc-unknown-28-3-2.col 0.23 0.12 0.12 
+graphs/hc-unknown-28-3-3.col 3.8 9.96 T 
+graphs/hc-unknown-28-4-1.col 0.28 0.18 0.23 
+graphs/hc-unknown-28-4-2.col 0.45 0.34 0.2 
+graphs/hc-unknown-28-4-3.col 0.38 0.08 0.0599999999999 
+graphs/hc-unknown-28-5-1.col 0.26 0.08 0.08 
+graphs/hc-unknown-28-5-2.col 0.35 0.09 0.08 
+graphs/hc-unknown-28-5-3.col 0.3 0.09 0.09 
+graphs/hc-unknown-28-6-1.col 0.27 0.1 0.0699999999999 
+graphs/hc-unknown-28-6-2.col 0.22 0.08 0.0599999999999 
+graphs/hc-unknown-28-6-3.col 0.18 0.09 0.08 
+graphs/hc-unknown-28-7-1.col 0.17 0.0700000000001 0.0599999999999 
+graphs/hc-unknown-28-7-2.col 0.21 0.0699999999999 0.0700000000001 
+graphs/hc-unknown-28-7-3.col 0.22 0.0699999999999 0.0700000000001 
+graphs/hc-unknown-30-3-1.col 0.43 0.11 0.12 
+graphs/hc-unknown-30-3-2.col 2.06 7.61 9.13 
+graphs/hc-unknown-30-3-3.col 0.39 0.1 0.0899999999999 
+graphs/hc-unknown-30-4-1.col 0.64 0.13 0.12 
+graphs/hc-unknown-30-4-2.col 0.94 0.12 0.11 
+graphs/hc-unknown-30-4-3.col 0.24 0.11 0.11 
+graphs/hc-unknown-30-5-1.col 0.28 0.11 0.0899999999999 
+graphs/hc-unknown-30-5-2.col 0.29 0.11 0.11 
+graphs/hc-unknown-30-5-3.col 0.44 0.1 0.0799999999999 
+graphs/hc-unknown-30-6-1.col 0.22 0.12 0.11 
+graphs/hc-unknown-30-6-2.col 0.37 0.1 0.0899999999999 
+graphs/hc-unknown-30-6-3.col 0.24 0.11 0.09 
+graphs/hc-unknown-30-7-1.col 0.27 0.09 0.0799999999999 
+graphs/hc-unknown-30-7-2.col 0.47 0.1 0.09 
+graphs/hc-unknown-30-7-3.col 0.32 0.11 0.09 
+graphs/hc-unknown-32-3-1.col 0.0799999999999 0.08 0.0700000000001 
+graphs/hc-unknown-32-3-2.col 0.48 9.93 T 
+graphs/hc-unknown-32-3-3.col 1.54 3.01 2.66 
+graphs/hc-unknown-32-4-1.col 0.0700000000001 0.0700000000001 0.0599999999999 
+graphs/hc-unknown-32-4-2.col 0.74 0.12 0.1 
+graphs/hc-unknown-32-4-3.col 0.83 2.77 2.6 
+graphs/hc-unknown-32-5-1.col 0.56 0.13 0.12 
+graphs/hc-unknown-32-5-2.col 0.65 1.1 1.21 
+graphs/hc-unknown-32-5-3.col 0.37 0.15 0.15 
+graphs/hc-unknown-32-6-1.col 0.42 0.17 0.16 
+graphs/hc-unknown-32-6-2.col 0.35 0.16 0.18 
+graphs/hc-unknown-32-6-3.col 0.48 0.14 0.14 
+graphs/hc-unknown-32-7-1.col 0.3 0.12 0.11 
+graphs/hc-unknown-32-7-2.col 0.26 0.12 0.11 
+graphs/hc-unknown-32-7-3.col 0.5 0.0999999999999 0.1 
+graphs/hc-unknown-34-3-1.col 1.08 T T 
+graphs/hc-unknown-34-3-2.col 0.12 0.09 0.0899999999999 
+graphs/hc-unknown-34-3-3.col 0.78 0.46 0.23 
+graphs/hc-unknown-34-4-1.col 0.89 1.16 1.21 
+graphs/hc-unknown-34-4-2.col 0.49 0.16 0.16 
+graphs/hc-unknown-34-4-3.col 0.76 1.18 0.41 
+graphs/hc-unknown-34-5-1.col 1.09 0.22 0.22 
+graphs/hc-unknown-34-5-2.col 0.32 0.28 0.27 
+graphs/hc-unknown-34-5-3.col 0.82 0.2 0.18 
+graphs/hc-unknown-34-6-1.col 0.43 0.15 0.14 
+graphs/hc-unknown-34-6-2.col 0.79 0.15 0.13 
+graphs/hc-unknown-34-6-3.col 0.89 0.15 0.15 
+graphs/hc-unknown-34-7-1.col 0.44 0.15 0.14 
+graphs/hc-unknown-34-7-2.col 0.37 0.14 0.13 
+graphs/hc-unknown-34-7-3.col 0.35 0.19 0.17 
+graphs/hc-unknown-36-3-1.col 0.67 T T 
+graphs/hc-unknown-36-3-2.col 2.42 2.12 0.23 
+graphs/hc-unknown-36-3-3.col 0.96 T T 
+graphs/hc-unknown-36-4-1.col 2.26 6.56 6.27 
+graphs/hc-unknown-36-4-2.col 1.19 0.32 0.31 
+graphs/hc-unknown-36-4-3.col 1.01 8.23 8.18 
+graphs/hc-unknown-36-5-1.col 1.44 0.61 0.63 
+graphs/hc-unknown-36-5-2.col 1.24 1.02 0.99 
+graphs/hc-unknown-36-5-3.col 1.62 0.29 0.3 
+graphs/hc-unknown-36-6-1.col 0.62 0.35 0.35 
+graphs/hc-unknown-36-6-2.col 0.79 0.21 0.19 
+graphs/hc-unknown-36-6-3.col 0.73 0.17 0.16 
+graphs/hc-unknown-36-7-1.col 0.77 0.19 0.18 
+graphs/hc-unknown-36-7-2.col 0.6 0.19 0.18 
+graphs/hc-unknown-36-7-3.col 0.61 0.24 0.23 
+graphs/hc-unknown-38-3-1.col T T T 
+graphs/hc-unknown-38-3-2.col 1.94 T T 
+graphs/hc-unknown-38-3-3.col 0.82 T T 
+graphs/hc-unknown-38-4-1.col 2.82 9.55 9.63 
+graphs/hc-unknown-38-4-2.col 1.97 4.77 4.8 
+graphs/hc-unknown-38-4-3.col 0.81 9.78 1.01 
+graphs/hc-unknown-38-5-1.col 2.01 0.33 0.35 
+graphs/hc-unknown-38-5-2.col 1.9 3.53 3.56 
+graphs/hc-unknown-38-5-3.col 1.2 0.22 0.21 
+graphs/hc-unknown-38-6-1.col 0.86 0.24 0.23 
+graphs/hc-unknown-38-6-2.col 1.05 0.83 0.71 
+graphs/hc-unknown-38-6-3.col 1.29 0.25 0.23 
+graphs/hc-unknown-38-7-1.col 0.67 0.24 0.23 
+graphs/hc-unknown-38-7-2.col 0.92 0.2 0.2 
+graphs/hc-unknown-38-7-3.col 0.7 0.21 0.2 
+graphs/hc-unknown-40-3-1.col 0.82 0.37 0.38 
+graphs/hc-unknown-40-3-2.col 5.8 T T 
+graphs/hc-unknown-40-3-3.col 1.02 T T 
+graphs/hc-unknown-40-4-1.col 0.68 0.28 0.26 
+graphs/hc-unknown-40-4-2.col 4.68 T T 
+graphs/hc-unknown-40-4-3.col 0.15 0.16 0.14 
+graphs/hc-unknown-40-5-1.col 4.11 1.06 5.34 
+graphs/hc-unknown-40-5-2.col 1.36 0.92 0.45 
+graphs/hc-unknown-40-5-3.col 2.02 0.3 0.3 
+graphs/hc-unknown-40-6-1.col 1.63 0.29 0.28 
+graphs/hc-unknown-40-6-2.col 1.4 0.34 0.35 
+graphs/hc-unknown-40-6-3.col 1.12 0.33 0.39 
+graphs/hc-unknown-40-7-1.col 0.74 0.28 0.28 
+graphs/hc-unknown-40-7-2.col 0.87 0.3 0.26 
+graphs/hc-unknown-40-7-3.col 1.11 0.37 0.38 
