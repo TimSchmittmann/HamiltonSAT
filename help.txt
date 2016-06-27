@@ -1,0 +1,751 @@
+
+MAIN OPTIONS:
+
+  -auto, -no-auto                                         (default: off)
+  -showUnusedParam, -no-showUnusedParam                   (default: off)
+  -cmd, -no-cmd                                           (default: off)
+  -parseOnly, -no-parseOnly                               (default: off)
+  -quiet, -no-quiet                                       (default: off)
+  -oldModel, -no-oldModel                                 (default: off)
+  -checkModel, -no-checkModel                             (default: off)
+
+  -maxConflicts = <int32>  [  -1 .. imax] (default: -1)
+  -mem-lim      = <int32>  [   0 .. imax] (default: 2147483647)
+  -cpu-lim      = <int32>  [   0 .. imax] (default: 2147483647)
+  -vv           = <int32>  [   1 .. imax] (default: 10000)
+  -helpLevel    = <int32>  [  -1 .. imax] (default: -1)
+  -verb         = <int32>  [   0 ..    2] (default: 1)
+
+  -config     = <std::string>
+
+PARAMETER CONFIGURATION OPTIONS:
+
+  -pcs-dLevel   = <int32>  [  -1 .. imax] (default: -1)
+
+  -pcs-file   = <std::string>
+
+PROOF OPTIONS:
+
+  -proof      = <std::string>
+  -proofFormat = <std::string>
+
+USAGE: ./solvers/HamiltonSAT/bin/riss [options] <input-file> <result-output-file>
+
+  where input may be either in plain or gzipped DIMACS.
+
+
+HELP OPTIONS:
+
+  --help        Print help message.
+  --help-verb   Print verbose help message.
+
+
+USAGE: ./solvers/HamiltonSAT/bin/riss [options] <input-file> <result-output-file>
+
+  where input may be either in plain or gzipped DIMACS.
+
+999HACK OPTIONS:
+
+  -act-based, -no-act-based                               (default: off)
+
+  -reduce-frac  = <double> (   0 ..    1) (default: 0.5)
+
+  -size-core    = <int32>  [   0 .. imax] (default: 0)
+  -lbd-core-th  = <int32>  [   0 .. imax] (default: 0)
+
+CLAUSE SHARING OPTIONS:
+
+  -independent, -no-independent                           (default: off)
+  -keepLonger, -no-keepLonger                             (default: off)
+  -dynLimits, -no-dynLimits                               (default: off)
+  -sendAll, -no-sendAll                                   (default: off)
+  -resRefRec, -no-resRefRec                               (default: off)
+  -refRec, -no-refRec                                     (default: off)
+  -recEE, -no-recEE                                       (default: off)
+  -receive, -no-receive                                   (default: on)
+
+  -recLBDf      = <double> [ -10 ..    1] (default: 0)
+
+  -shareTime    = <int32>  [   0 ..    2] (default: 1)
+
+CORE OPTIONS:
+
+  -rmf, -no-rmf                                           (default: off)
+  -solve_stats, -no-solve_stats                           (default: off)
+
+  -gc-frac      = <double> (   0 ..    1) (default: 0.2)
+
+CORE -- CONFLICT ANALYSIS OPTIONS:
+
+  -learnDecRER, -no-learnDecRER                           (default: off)
+
+  -learnDecMS   = <int32>  [   2 .. imax] (default: 2)
+  -learnDecP    = <int32>  [  -1 ..  100] (default: -1)
+
+CORE -- CONFLIG ANALYSIS OPTIONS:
+
+  -alluiphack   = <int32>  [   0 ..    2] (default: 0)
+
+CORE -- EXTENDED RESOLUTION RER OPTIONS:
+
+  -rer-g, -no-rer-g                                       (default: off)
+  -rer-e, -no-rer-e                                       (default: off)
+  -rer-ite, -no-rer-ite                                   (default: off)
+  -rer-f, -no-rer-f                                       (default: on)
+  -rer-rn, -no-rer-rn                                     (default: off)
+  -rer-l, -no-rer-l                                       (default: on)
+  -rer, -no-rer                                           (default: off)
+
+  -rer-ga       = <double> [   0 ..  inf] (default: 0)
+  -rer-freq     = <double> [   0 ..    1] (default: 1)
+
+  -er-lbd       = <int32>  [   0 .. imax] (default: 6)
+  -er-size      = <int32>  [   0 .. imax] (default: 30)
+  -rer-new-act  = <int32>  [   0 ..    4] (default: 0)
+  -rer-window   = <int32>  [   2 .. imax] (default: 2)
+  -rer-maxLBD   = <int32>  [   1 .. imax] (default: 2147483647)
+  -rer-minLBD   = <int32>  [   1 .. imax] (default: 1)
+  -rer-max-size = <int32>  [   2 .. imax] (default: 2147483647)
+  -rer-min-size = <int32>  [   2 .. imax] (default: 2)
+  -rer-r        = <int32>  [   0 ..    2] (default: 0)
+
+CORE -- INCREMENTAL OPTIONS:
+
+  -incResCnt    = <int32>  [   0 .. imax] (default: 100000)
+  -incClLBD     = <int32>  [   1 .. imax] (default: 10)
+  -incClSize    = <int32>  [   1 .. imax] (default: 5)
+  -incClean     = <int32>  [   0 .. imax] (default: 0)
+  -incResPol    = <int32>  [   0 .. imax] (default: 0)
+  -incResAct    = <int32>  [   0 .. imax] (default: 0)
+
+CORE -- INTERLEAVED CLAUSE STRENGTHENING OPTIONS:
+
+  -ics_shrinkNew, -no-ics_shrinkNew                       (default: off)
+  -ics_dyn, -no-ics_dyn                                   (default: off)
+  -ics_keepNew, -no-ics_keepNew                           (default: off)
+  -ics, -no-ics                                           (default: off)
+
+  -ics_relSIZE  = <double> [   0 ..  inf] (default: 1)
+  -ics_relLBD   = <double> [   0 ..  inf] (default: 1)
+
+  -ics_processLast = <int32>  [   0 .. imax] (default: 5050)
+  -ics_window   = <int32>  [   0 .. imax] (default: 5000)
+
+CORE -- LOCAL LOOK AHEAD OPTIONS:
+
+  -laEEl, -no-laEEl                                       (default: off)
+  -dyn, -no-dyn                                           (default: off)
+  -tabu, -no-tabu                                         (default: on)
+  -laHack, -no-laHack                                     (default: off)
+
+  -hlaTop       = <int32>  [  -1 .. imax] (default: -1)
+  -hlabound     = <int32>  [  -1 .. imax] (default: 4096)
+  -hlaevery     = <int32>  [   0 .. imax] (default: 1)
+  -hlaLevel     = <int32>  [   1 ..    5] (default: 5)
+  -hlaMax       = <int32>  [   0 .. imax] (default: 50)
+  -laEEp        = <int32>  [   0 ..  100] (default: 0)
+
+CORE -- MINIMIZE OPTIONS:
+
+  -revMin, -no-revMin                                     (default: off)
+  -updLearnAct, -no-updLearnAct                           (default: on)
+  -biAsserting, -no-biAsserting                           (default: off)
+  -revRevC, -no-revRevC                                   (default: off)
+  -refConflict, -no-refConflict                           (default: on)
+
+  -sUHLElbd     = <int32>  [   0 .. imax] (default: 6)
+  -sUHLEsize    = <int32>  [   0 .. imax] (default: 0)
+  -sUhdPrSh     = <int32>  [   0 .. imax] (default: 0)
+  -sUhdProbe    = <int32>  [   0 ..    3] (default: 0)
+  -revMinLBD    = <int32>  [   1 .. imax] (default: 6)
+  -revMinSize   = <int32>  [   2 .. imax] (default: 12)
+  -ccmin-mode   = <int32>  [   0 ..    2] (default: 2)
+  -minLBDMinimizingClause = <int32>  [   0 .. imax] (default: 6)
+  -minSizeMinimizingClause = <int32>  [   0 .. imax] (default: 30)
+  -biAsFreq     = <int32>  [   1 .. imax] (default: 4)
+
+CORE -- PROOF OPTIONS:
+
+  -rup-only, -no-rup-only                                 (default: off)
+
+  -proof-oft-check = <int32>  [   0 ..   10] (default: 0)
+  -verb-proof   = <int32>  [   0 ..    2] (default: 0)
+
+CORE -- REDUCE OPTIONS:
+
+  -quickRed, -no-quickRed                                 (default: off)
+  -incLBD, -no-incLBD                                     (default: off)
+  -lbdIgnLA, -no-lbdIgnLA                                 (default: off)
+  -lbdIgnL0, -no-lbdIgnL0                                 (default: off)
+
+  -cla-decay    = <double> (   0 ..    1) (default: 0.999)
+  -keepWorst    = <double> [   0 ..    1] (default: 0)
+
+  -lbdupd       = <int32>  [   0 ..    2] (default: 1)
+  -minLBDFrozenClause = <int32>  [   0 .. imax] (default: 30)
+  -specialIncReduceDB = <int32>  [   0 .. imax] (default: 1000)
+  -incReduceDB  = <int32>  [   0 .. imax] (default: 300)
+  -firstReduceDB = <int32>  [   0 .. imax] (default: 4000)
+
+CORE -- RESTART OPTIONS:
+
+  -rMaxInc      = <double> [   1 ..  inf) (default: 1.1)
+  -rinc         = <double> (   1 ..  inf) (default: 2)
+  -rem-asi      = <double> (   0 ..  inf) (default: 1.1)
+  -rem-lsi      = <double> (   0 ..  inf) (default: 1.1)
+  -rem-lsf      = <double> (   0 ..  inf) (default: 0.333333)
+  -R            = <double> (   1 ..    5) (default: 1.4)
+  -K            = <double> (   0 ..    1) (default: 0.8)
+
+  -rMax         = <int32>  [  -1 .. imax] (default: -1)
+  -irlevel      = <int32>  [   1 .. imax] (default: 1)
+  -rfirst       = <int32>  [   1 .. imax] (default: 100)
+  -rtype        = <int32>  [   0 ..    2] (default: 0)
+  -rlevel       = <int32>  [   0 ..    2] (default: 0)
+  -rem-minlearnts = <int32>  [   0 .. imax] (default: 0)
+  -rem-asc      = <int32>  [   0 .. imax] (default: 100)
+  -remtype      = <int32>  [   0 ..    1] (default: 0)
+  -sbr          = <int32>  [   0 .. imax] (default: 12)
+  -szTrailQueue = <int32>  [  10 .. imax] (default: 5000)
+  -szLBDQueue   = <int32>  [  10 .. imax] (default: 50)
+
+CORE -- SEARCH OPTIONS:
+
+  -vsids-i      = <double> [   0 ..    1] (default: 1)
+  -vsids-e      = <double> [   0 ..    1] (default: 1)
+  -vsids-s      = <double> [   0 ..    1] (default: 1)
+  -rnd-seed     = <double> (   0 ..  inf) (default: 9.16483e+07)
+  -rnd-freq     = <double> [   0 ..    1] (default: 0)
+  -var-decay-i  = <double> (   0 ..    1) (default: 0.01)
+  -var-decay-e  = <double> (   0 ..    1) (default: 0.95)
+  -var-decay-b  = <double> (   0 ..    1) (default: 0.95)
+
+  -clsActB      = <int32>  [   0 ..    3] (default: 0)
+  -varActB      = <int32>  [   0 ..    2] (default: 0)
+  -vsids-d      = <int32>  [   1 .. imax] (default: 2147483647)
+  -phase-saving = <int32>  [   0 ..    2] (default: 2)
+  -var-decay-d  = <int32>  [   1 .. imax] (default: 5000)
+
+Contrasat OPTIONS:
+
+  -pq-order, -no-pq-order                                 (default: off)
+
+DEBUG OPTIONS:
+
+  -printOnSolve = <std::string>
+
+INIT OPTIONS:
+
+  -polMode, -no-polMode                                   (default: off)
+  -rnd-init, -no-rnd-init                                 (default: off)
+
+  -actDec       = <double> (   0 ..    1] (default: 1.05263)
+  -actStart     = <double> (   0 ..  inf) (default: 1024)
+
+  -actIncMode   = <int32>  [   0 ..    3] (default: 0)
+  -init-pol     = <int32>  [   0 ..    6] (default: 0)
+  -init-act     = <int32>  [   0 ..    6] (default: 0)
+
+  -polFile    = <std::string>
+  -actFile    = <std::string>
+
+MISC OPTIONS:
+
+  -useIP, -no-useIP                                       (default: on)
+  -usePP, -no-usePP                                       (default: on)
+  -delay-units, -no-delay-units                           (default: off)
+  -ppOnly, -no-ppOnly                                     (default: off)
+
+  -incsverb     = <int32>  [   0 ..    2] (default: 0)
+  -solververb   = <int32>  [   0 ..    2] (default: 0)
+  -sInterval    = <int32>  [   0 .. imax] (default: 0)
+  -nanosleep    = <int32>  [   0 .. imax] (default: 0)
+
+MiPiSAT OPTIONS:
+
+  -prob-limit   = <int32>  [   1 .. imax] (default: 32)
+  -prob-step-width = <int32>  [   0 .. imax] (default: 0)
+
+REASON OPTIONS:
+
+  -longConflict, -no-longConflict                         (default: off)
+
+SCHEDULE OPTIONS:
+
+  -sscheInc     = <double> [   1 ..  inf) (default: 1.3)
+
+  -sscheDConflicts = <int32>  [   1 .. imax] (default: 3000000)
+  -sscheConflicts = <int32>  [   1 .. imax] (default: 10000000)
+
+  -sschedule  = <std::string>
+
+SEARCH -- OTFSS OPTIONS:
+
+  -otfssL, -no-otfssL                                     (default: off)
+  -otfss, -no-otfss                                       (default: off)
+
+  -otfssMLDB    = <int32>  [   2 .. imax] (default: 30)
+
+cir-minisat OPTIONS:
+
+  -cir-bump     = <int32>  [   0 .. imax] (default: 0)
+
+USAGE: ./solvers/HamiltonSAT/bin/riss [options] <input-file> <result-output-file>
+
+  where input may be either in plain or gzipped DIMACS.
+
+COPROCESSOR OPTIONS:
+
+  -cp3_stats, -no-cp3_stats                               (default: off)
+  -inc-inp, -no-inc-inp                                   (default: off)
+  -randInp, -no-randInp                                   (default: on)
+  -cp3_randomized, -no-cp3_randomized                     (default: off)
+  -cp3_limited, -no-cp3_limited                           (default: on)
+  -inprocess, -no-inprocess                               (default: off)
+  -enabled_cp3, -no-enabled_cp3                           (default: off)
+
+  -cp3_viv_lits = <int32>  [   0 .. imax] (default: 15000000)
+  -cp3_viv_cls  = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_viv_vars = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_probe_lits = <int32>  [   0 .. imax] (default: 30000000)
+  -cp3_probe_cls = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_probe_vars = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_Xbva_lits = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_Xbva_cls = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_Xbva_vars = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_Ibva_lits = <int32>  [   0 .. imax] (default: 40000000)
+  -cp3_Ibva_cls = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_Ibva_vars = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_rew_lits = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_rew_cls  = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_rew_vars = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_sls_lits = <int32>  [   0 .. imax] (default: 4000000)
+  -cp3_sls_cls  = <int32>  [   0 .. imax] (default: 500000)
+  -cp3_sls_vars = <int32>  [   0 .. imax] (default: 500000)
+  -cp3_xor_lits = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_xor_cls  = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_xor_vars = <int32>  [   0 .. imax] (default: 700000)
+  -cp3_fm_lits  = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_fm_cls   = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_fm_vars  = <int32>  [   0 .. imax] (default: 2000000)
+  -cp3_symm_lits = <int32>  [   0 .. imax] (default: 15000000)
+  -cp3_symm_cls = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_symm_vars = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_aBin_lits = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_aBin_cls = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_aBin_vars = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_tRes_lits = <int32>  [   0 .. imax] (default: 50000000)
+  -cp3_tRes_cls = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_tRes_vars = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_unhide_lits = <int32>  [   0 .. imax] (default: 7000000)
+  -cp3_unhide_cls = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_unhide_vars = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_bva_lits = <int32>  [   0 .. imax] (default: 40000000)
+  -cp3_bva_cls  = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_bva_vars = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_bve_lits = <int32>  [   0 .. imax] (default: 50000000)
+  -cp3_bve_cls  = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_bve_vars = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_ee_lits  = <int32>  [   0 .. imax] (default: 40000000)
+  -cp3_ee_cls   = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_ee_vars  = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_rate_lits = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_rate_cls = <int32>  [   0 .. imax] (default: 2000000)
+  -cp3_rate_vars = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_cce_lits = <int32>  [   0 .. imax] (default: 50000000)
+  -cp3_cce_cls  = <int32>  [   0 .. imax] (default: 30000000)
+  -cp3_cce_vars = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_la_lits  = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_la_cls   = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_la_vars  = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_ent_lits = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_ent_cls  = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_ent_vars = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_bce_lits = <int32>  [   0 .. imax] (default: 30000000)
+  -cp3_bce_cls  = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_bce_vars = <int32>  [   0 .. imax] (default: 3000000)
+  -cp3_hte_lits = <int32>  [   0 .. imax] (default: 20000000)
+  -cp3_hte_cls  = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_hte_vars = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_susi_lits = <int32>  [   0 .. imax] (default: 10000000)
+  -cp3_susi_cls = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_susi_vars = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_threads  = <int32>  [   0 .. imax] (default: 0)
+  -cp3_verbose  = <int32>  [   0 ..    5] (default: 0)
+  -cp3-exit-pp  = <int32>  [   0 ..    3] (default: 0)
+  -cp3_iters    = <int32>  [   0 .. imax] (default: 1)
+  -cp3_iinp_cons = <int32>  [   0 .. imax] (default: 0)
+  -cp3_inp_cons = <int32>  [   0 .. imax] (default: 20000)
+  -cp3_iplits   = <int32>  [   0 .. imax] (default: 50000000)
+  -cp3_ipcls    = <int32>  [   0 .. imax] (default: 30000000)
+  -cp3_ipvars   = <int32>  [   0 .. imax] (default: 5000000)
+  -cp3_lits     = <int32>  [   0 .. imax] (default: 50000000)
+  -cp3_cls      = <int32>  [   0 .. imax] (default: 30000000)
+  -cp3_vars     = <int32>  [   0 .. imax] (default: 5000000)
+
+COPROCESSOR  TECHNIQUES OPTIONS:
+
+  -2sat, -no-2sat                                         (default: off)
+  -rew, -no-rew                                           (default: off)
+  -xor, -no-xor                                           (default: off)
+  -sls, -no-sls                                           (default: off)
+  -fm, -no-fm                                             (default: off)
+  -symm, -no-symm                                         (default: off)
+  -simplify, -no-simplify                                 (default: on)
+  -shuffle, -no-shuffle                                   (default: off)
+  -dense, -no-dense                                       (default: off)
+  -addRed2, -no-addRed2                                   (default: off)
+  -3resolve, -no-3resolve                                 (default: off)
+  -probe, -no-probe                                       (default: off)
+  -unhide, -no-unhide                                     (default: off)
+  -bva, -no-bva                                           (default: off)
+  -bve, -no-bve                                           (default: off)
+  -ee, -no-ee                                             (default: off)
+  -rate, -no-rate                                         (default: off)
+  -cce, -no-cce                                           (default: off)
+  -la, -no-la                                             (default: off)
+  -exp, -no-exp                                           (default: off)
+  -ent, -no-ent                                           (default: off)
+  -bce, -no-bce                                           (default: off)
+  -hte, -no-hte                                           (default: off)
+  -subsimp, -no-subsimp                                   (default: off)
+  -up, -no-up                                             (default: off)
+
+  -cp3_itechs = <std::string>
+  -cp3_ptechs = <std::string>
+  -whiteList  = <std::string>
+
+COPROCESSOR - BCE OPTIONS:
+
+  -bce-cle-cons, -no-bce-cle-cons                         (default: off)
+  -bce-cla, -no-bce-cla                                   (default: off)
+  -bce-cle, -no-bce-cle                                   (default: off)
+  -bce-bcm, -no-bce-bcm                                   (default: off)
+  -bce-bce, -no-bce-bce                                   (default: on)
+  -bce-bin, -no-bce-bin                                   (default: off)
+  -bce-compl, -no-bce-compl                               (default: on)
+
+  -bce-verbose  = <int32>  [   0 ..    3] (default: 0)
+  -bce-incInp   = <int32>  [   0 .. imax] (default: 10000)
+  -bce-limit    = <int32>  [   0 .. imax] (default: 100000000)
+
+COPROCESSOR - BVA OPTIONS:
+
+  -cp3_bva_subOr, -no-cp3_bva_subOr                       (default: off)
+  -cp3_bva_dupli, -no-cp3_bva_dupli                       (default: on)
+  -cp3_bva_compl, -no-cp3_bva_compl                       (default: on)
+  -cp3_Abva, -no-cp3_Abva                                 (default: off)
+
+  -cp3_Ibva_heap = <int32>  [   0 ..   10] (default: 1)
+  -cp3_Xbva_heap = <int32>  [   0 ..   10] (default: 1)
+  -cp3_bva_Imax = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_bva_Xmax = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_bva_Ilimit = <int32>  [   0 .. imax] (default: 100000000)
+  -cp3_bva_Xlimit = <int32>  [   0 .. imax] (default: 100000000)
+  -cp3_Ibva     = <int32>  [   0 ..    2] (default: 0)
+  -cp3_Xbva     = <int32>  [   0 ..    2] (default: 0)
+  -cp3_Abva_heap = <int32>  [   0 ..   10] (default: 1)
+  -cp3_bva_incInp = <int32>  [   0 .. imax] (default: 80000)
+  -cp3_bva_Amax = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_bva_limit = <int32>  [   0 .. imax] (default: 1200000)
+  -cp3_bva_Vlimit = <int32>  [  -1 .. imax] (default: 3000000)
+  -cp3_bva_push = <int32>  [   0 ..    2] (default: 2)
+
+COPROCESSOR - BVE OPTIONS:
+
+  -par_bve_min_upd, -no-par_bve_min_upd                   (default: off)
+  -bve_progress, -no-bve_progress                         (default: off)
+  -bce_only, -no-bce_only                                 (default: off)
+  -bve_early, -no-bve_early                               (default: off)
+  -bve_BCElim, -no-bve_BCElim                             (default: off)
+  -bve_totalG, -no-bve_totalG                             (default: off)
+  -bve_fdepOnly, -no-bve_fdepOnly                         (default: off)
+  -bve_force_gates, -no-bve_force_gates                   (default: off)
+  -bve_gates, -no-bve_gates                               (default: on)
+  -bve_strength, -no-bve_strength                         (default: on)
+  -bve_unlimited, -no-bve_unlimited                       (default: off)
+
+  -postp_lockd_neighb = <int32>  [   0 .. imax] (default: 3)
+  -par_bve_th   = <int32>  [   0 .. imax] (default: 10000)
+  -cp3_bve_inpInc = <int32>  [   0 .. imax] (default: 5000000)
+  -bve_heap_updates = <int32>  [   0 ..    2] (default: 1)
+  -bve_cgrow_t  = <int32>  [   0 .. imax] (default: 2147483647)
+  -bve_cgrow    = <int32>  [-2147483647 .. imax] (default: 0)
+  -cp3_bve_heap = <int32>  [   0 ..   10] (default: 0)
+  -cp3_bve_resolve_learnts = <int32>  [   0 ..    2] (default: 0)
+  -cp3_bve_learnt_growth = <int32>  [  -1 .. imax] (default: 0)
+  -cp3_bve_limit = <int32>  [  -1 .. imax] (default: 25000000)
+  -cp3_bve_verbose = <int32>  [   0 ..    4] (default: 0)
+  -cp3_par_bve  = <int32>  [   0 ..    2] (default: 1)
+
+COPROCESSOR - CCE OPTIONS:
+
+  -cp3_cce_inpInc = <int32>  [   0 .. imax] (default: 60000)
+  -cp3_cce_sizeP = <int32>  [   0 ..  100] (default: 40)
+  -cp3_cce_level = <int32>  [   0 ..    3] (default: 3)
+  -cp3_cce_steps = <int32>  [  -1 .. imax] (default: 2000000)
+
+COPROCESSOR - DENSE OPTIONS:
+
+  -cp3_keep_set, -no-cp3_keep_set                         (default: off)
+  -cp3_dense_forw, -no-cp3_dense_forw                     (default: off)
+  -dense_inp, -no-dense_inp                               (default: off)
+
+  -cp3_dense_frag = <int32>  [   0 ..  100] (default: 0)
+
+COPROCESSOR - ENTAILED OPTIONS:
+
+  -ent-min      = <int32>  [   2 .. imax] (default: 2)
+
+COPROCESSOR - EQUIVALENCE ELIMINATION OPTIONS:
+
+  -ee_freeze_eager, -no-ee_freeze_eager                   (default: on)
+  -cp3_ee_subNew, -no-cp3_ee_subNew                       (default: off)
+  -cp3_ee_it, -no-cp3_ee_it                               (default: off)
+  -ee_reset, -no-ee_reset                                 (default: off)
+  -ee_sub, -no-ee_sub                                     (default: off)
+  -cp3_BigThenGate, -no-cp3_BigThenGate                   (default: on)
+  -cp3_eagerGates, -no-cp3_eagerGates                     (default: on)
+
+  -cp3_ee_bIter = <int32>  [   0 .. imax] (default: 3)
+  -cp3_ee_inpInc = <int32>  [   0 .. imax] (default: 200000)
+  -cp3_ee_limit = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_ee_cIter = <int32>  [  -1 .. imax] (default: 2)
+  -cp3_ee_glimit = <int32>  [   0 .. imax] (default: 2147483647)
+  -cp3_ee_level = <int32>  [   0 ..    3] (default: 0)
+
+  -ee_aag     = <std::string>
+
+COPROCESSOR - EQUIVALENCE ELIMINATION - HASHING OPTIONS:
+
+  -cp3_extImplied, -no-cp3_extImplied                     (default: on)
+  -cp3_extNgtInput, -no-cp3_extNgtInput                   (default: on)
+  -cp3_addBlocked, -no-cp3_addBlocked                     (default: off)
+  -cp3_extBlocked, -no-cp3_extBlocked                     (default: off)
+  -cp3_extHASUM, -no-cp3_extHASUM                         (default: off)
+  -cp3_genAND, -no-cp3_genAND                             (default: off)
+  -cp3_extExO, -no-cp3_extExO                             (default: off)
+  -cp3_extXOR, -no-cp3_extXOR                             (default: off)
+  -cp3_extITE, -no-cp3_extITE                             (default: off)
+  -cp3_extAND, -no-cp3_extAND                             (default: on)
+
+COPROCESSOR - FOURIERMOTZKIN OPTIONS:
+
+  -card_noUnits, -no-card_noUnits                         (default: off)
+  -cp3_fm_1st, -no-cp3_fm_1st                             (default: off)
+  -cp3_fm_newSub, -no-cp3_fm_newSub                       (default: on)
+  -cp3_fm_keepM, -no-cp3_fm_keepM                         (default: on)
+  -cp3_fm_cut, -no-cp3_fm_cut                             (default: on)
+  -cp3_fm_vMulAMT, -no-cp3_fm_vMulAMT                     (default: off)
+  -cp3_fm_vMulAMO, -no-cp3_fm_vMulAMO                     (default: on)
+  -cp3_fm_dups, -no-cp3_fm_dups                           (default: on)
+  -cp3_fm_merge, -no-cp3_fm_merge                         (default: on)
+  -cp3_fm_unit, -no-cp3_fm_unit                           (default: on)
+  -cp3_fm_sem, -no-cp3_fm_sem                             (default: on)
+  -cp3_fm_twoPr, -no-cp3_fm_twoPr                         (default: on)
+  -cp3_fm_amt, -no-cp3_fm_amt                             (default: on)
+
+  -card_max     = <int32>  [   2 .. imax] (default: 12)
+  -card_maxC    = <int32>  [   2 .. imax] (default: 6)
+  -card_minC    = <int32>  [   2 .. imax] (default: 3)
+  -cp3_fm_newAlk = <int32>  [   0 ..    2] (default: 2)
+  -cp3_fm_newAlo = <int32>  [   0 ..    2] (default: 2)
+  -cp3_fm_newAmo = <int32>  [   0 ..    2] (default: 2)
+  -cp3_fm_growT = <int32>  [   0 .. imax] (default: 100000)
+  -cp3_fm_grow  = <int32>  [   0 .. imax] (default: 40)
+  -cp3_fm_maxA  = <int32>  [   3 .. imax] (default: 200)
+  -cp3_fm_maxConstraints = <int32>  [   0 .. imax] (default: 200000)
+
+  -card_Elimit  = <int64>  [   0 .. imax] (default: 1200000)
+  -cp3_fm_Slimit = <int64>  [   0 .. imax] (default: 12000000)
+  -cp3_fm_limit = <int64>  [   0 .. imax] (default: 6000000)
+
+COPROCESSOR - HTE OPTIONS:
+
+  -cp3_hteTalk, -no-cp3_hteTalk                           (default: off)
+  -cp3_par_hte, -no-cp3_par_hte                           (default: off)
+
+  -cp3_hte_inpInc = <int32>  [   0 .. imax] (default: 60000)
+  -cp3_hte_steps = <int32>  [  -1 .. imax] (default: 2147483647)
+
+COPROCESSOR - LA OPTIONS:
+
+  -la-alaBin, -no-la-alaBin                               (default: off)
+  -la-ala, -no-la-ala                                     (default: off)
+  -la-cla, -no-la-cla                                     (default: on)
+
+  -la-alaIter   = <int32>  [   1 .. imax] (default: 1)
+  -ala-limit    = <int32>  [   0 .. imax] (default: 100000000)
+  -la-claIter   = <int32>  [   1 .. imax] (default: 1)
+  -la-claMax    = <int32>  [   1 .. imax] (default: 2)
+  -la-claStep   = <int32>  [   1 .. imax] (default: 4)
+  -cla-limit    = <int32>  [   0 .. imax] (default: 100000000)
+
+COPROCESSOR - PROBING OPTIONS:
+
+  -pr-nce, -no-pr-nce                                     (default: on)
+  -pr-vivi, -no-pr-vivi                                   (default: off)
+  -pr-EE, -no-pr-EE                                       (default: on)
+  -pr-lhbr, -no-pr-lhbr                                   (default: on)
+  -pr-repeat, -no-pr-repeat                               (default: off)
+  -pr-roots, -no-pr-roots                                 (default: on)
+  -pr-double, -no-pr-double                               (default: on)
+  -pr-bins, -no-pr-bins                                   (default: on)
+  -pr-probe, -no-pr-probe                                 (default: off)
+
+  -pr-keepLHBR  = <int32>  [   0 ..    1] (default: 0)
+  -cp3_viv_inpInc = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_pr_inpInc = <int32>  [   0 .. imax] (default: 1000000)
+  -pr-viviL     = <int32>  [   0 .. imax] (default: 5000000)
+  -pr-viviP     = <int32>  [   0 ..  100] (default: 80)
+  -pr-keepI     = <int32>  [   0 ..    2] (default: 2)
+  -pr-keepL     = <int32>  [   0 ..    2] (default: 2)
+  -pr-probeL    = <int32>  [   0 .. imax] (default: 200000)
+  -pr-csize     = <int32>  [   0 .. imax] (default: 2147483647)
+  -pr-uips      = <int32>  [  -1 .. imax] (default: -1)
+
+COPROCESSOR - RAT Elimination OPTIONS:
+
+  -rate-ratm_rounds, -no-rate-ratm_rounds                 (default: off)
+  -rate-ratm_ext, -no-rate-ratm_ext                       (default: off)
+  -rate-ratm, -no-rate-ratm                               (default: off)
+  -rate-bcs, -no-rate-bcs                                 (default: off)
+  -rate-rate, -no-rate-rate                               (default: off)
+  -rate-brat, -no-rate-brat                               (default: off)
+  -rat-compl, -no-rat-compl                               (default: on)
+
+  -rate-min     = <int32>  [   2 .. imax] (default: 3)
+
+  -ratm-limit   = <int64>  [   0 .. imax] (default: 9000000000)
+  -rate-limit   = <int64>  [   0 .. imax] (default: 9000000000)
+
+COPROCESSOR - RES OPTIONS:
+
+  -cp3_res_ars, -no-cp3_res_ars                           (default: off)
+  -cp3_res_add_lea, -no-cp3_res_add_lea                   (default: off)
+  -cp3_res_add_lev, -no-cp3_res_add_lev                   (default: on)
+  -cp3_res_add_red, -no-cp3_res_add_red                   (default: off)
+  -cp3_res_eagerSub, -no-cp3_res_eagerSub                 (default: on)
+  -cp3_res3_reAdd, -no-cp3_res3_reAdd                     (default: off)
+  -cp3_res_bin, -no-cp3_res_bin                           (default: off)
+
+  -cp3_res_percent = <double> [   0 ..    1] (default: 0.01)
+
+  -cp3_add_inpInc = <int32>  [   0 .. imax] (default: 60000)
+  -cp3_res_inpInc = <int32>  [   0 .. imax] (default: 200000)
+  -cp3_res3_ncls = <int32>  [   0 .. 2147483646] (default: 100000)
+  -cp3_res3_steps = <int32>  [   0 .. 2147483646] (default: 1000000)
+
+COPROCESSOR - REWRITE OPTIONS:
+
+  -cp3_rewI_small, -no-cp3_rewI_small                     (default: on)
+  -cp3_rew_stats, -no-cp3_rew_stats                       (default: off)
+  -cp3_rew_once, -no-cp3_rew_once                         (default: on)
+  -cp3_rew_ratio, -no-cp3_rew_ratio                       (default: on)
+  -cp3_rew_avg, -no-cp3_rew_avg                           (default: on)
+  -cp3_rew_1st, -no-cp3_rew_1st                           (default: off)
+  -cp3_rew_merge, -no-cp3_rew_merge                       (default: off)
+  -cp3_rew_exo, -no-cp3_rew_exo                           (default: on)
+  -cp3_rew_imp, -no-cp3_rew_imp                           (default: off)
+  -cp3_rew_amo, -no-cp3_rew_amo                           (default: on)
+
+  -cp3_rew_inpInc = <int32>  [   0 .. imax] (default: 60000)
+  -cp3_rewI_min = <int32>  [   0 .. imax] (default: 4)
+  -cp3_rew_Addlimit = <int32>  [   0 .. imax] (default: 100000)
+  -cp3_rew_Vlimit = <int32>  [   0 .. imax] (default: 1000000)
+  -cp3_rew_limit = <int32>  [   0 .. imax] (default: 1200000)
+  -cp3_rew_minA = <int32>  [   0 .. imax] (default: 3)
+  -cp3_rew_iter = <int32>  [   0 .. imax] (default: 1)
+  -cp3_rew_min  = <int32>  [   0 .. imax] (default: 3)
+
+COPROCESSOR - SHUFFLE OPTIONS:
+
+  -shuffle-order, -no-shuffle-order                       (default: on)
+
+  -shuffle-seed = <int32>  [   0 .. imax] (default: 0)
+
+COPROCESSOR - SLS OPTIONS:
+
+  -sls-adopt-cls, -no-sls-adopt-cls                       (default: off)
+  -sls-phase, -no-sls-phase                               (default: off)
+
+  -sls-rnd-walk = <int32>  [   0 .. 10000] (default: 2000)
+  -sls-ksat-flips = <int32>  [  -1 .. imax] (default: 20000000)
+  -sls-flips    = <int32>  [  -1 .. imax] (default: 8000000)
+
+COPROCESSOR - SUBSUMPTION OPTIONS:
+
+  -cp3_lock_stats, -no-cp3_lock_stats                     (default: off)
+  -cp3_inpPrefL, -no-cp3_inpPrefL                         (default: on)
+  -cp3_strength, -no-cp3_strength                         (default: on)
+  -naive_strength, -no-naive_strength                     (default: off)
+
+  -par_str_minCls = <int32>  [   1 .. imax] (default: 250000)
+  -susi_chunk_size = <int32>  [   1 .. imax] (default: 100000)
+  -par_subs_counts = <int32>  [   0 ..    1] (default: 1)
+  -cp3_par_subs = <int32>  [   0 ..    2] (default: 1)
+  -cp3_par_strength = <int32>  [   0 ..    2] (default: 1)
+  -cp3_sub_inpInc = <int32>  [   0 .. imax] (default: 40000000)
+  -cp3_call_inc = <int32>  [   0 .. imax] (default: 200)
+  -cp3_str_limit = <int32>  [   0 .. imax] (default: 300000000)
+  -cp3_sub_limit = <int32>  [   0 .. imax] (default: 300000000)
+  -all_strength_res = <int32>  [   0 .. imax] (default: 0)
+
+COPROCESSOR - SYMMETRY OPTIONS:
+
+  -sym-clLearn, -no-sym-clLearn                           (default: off)
+  -sym-propA, -no-sym-propA                               (default: off)
+  -sym-propF, -no-sym-propF                               (default: off)
+  -sym-prop, -no-sym-prop                                 (default: off)
+  -sym-exit, -no-sym-exit                                 (default: off)
+  -sym-print, -no-sym-print                               (default: off)
+  -sym-show, -no-sym-show                                 (default: off)
+  -sym-unit, -no-sym-unit                                 (default: off)
+  -sym-pol, -no-sym-pol                                   (default: off)
+  -sym-size, -no-sym-size                                 (default: off)
+
+  -sym-ratio    = <double> [   0 ..  inf] (default: 0.4)
+
+  -sym-consT    = <int32>  [   0 .. imax] (default: 10000)
+  -sym-cons     = <int32>  [   0 .. imax] (default: 0)
+  -sym-iter     = <int32>  [   0 .. imax] (default: 3)
+  -sym-min      = <int32>  [   1 .. imax] (default: 2)
+
+COPROCESSOR - TWOSAT OPTIONS:
+
+  -2sat-cq, -no-2sat-cq                                   (default: on)
+  -2sat-units, -no-2sat-units                             (default: off)
+  -2sat-phase, -no-2sat-phase                             (default: off)
+  -2sat1, -no-2sat1                                       (default: off)
+
+COPROCESSOR - UNHIDE OPTIONS:
+
+  -cp3_uhdPrSiBo, -no-cp3_uhdPrSiBo                       (default: on)
+  -cp3_uhdPrEE, -no-cp3_uhdPrEE                           (default: off)
+  -cp3_uhdTstDbl, -no-cp3_uhdTstDbl                       (default: off)
+  -cp3_uhdEE, -no-cp3_uhdEE                               (default: off)
+  -cp3_uhdNoShuffle, -no-cp3_uhdNoShuffle                 (default: off)
+  -cp3_uhdUHTE, -no-cp3_uhdUHTE                           (default: on)
+  -cp3_uhdTrans, -no-cp3_uhdTrans                         (default: off)
+
+  -cp3_uhdPrSize = <int32>  [   2 .. imax] (default: 2)
+  -cp3_uhdProbe = <int32>  [   0 ..    4] (default: 0)
+  -cp3_uhdUHLE  = <int32>  [   0 ..    3] (default: 3)
+  -cp3_uhdIters = <int32>  [   0 .. imax] (default: 3)
+
+COPROCESSOR - XOR OPTIONS:
+
+  -xorAddNew, -no-xorAddNew                               (default: off)
+  -xorEncL, -no-xorEncL                                   (default: off)
+  -xorEncSubs, -no-xorEncSubs                             (default: off)
+  -xorDropPure, -no-xorDropPure                           (default: off)
+  -xorFindRes, -no-xorFindRes                             (default: off)
+  -xorFindSubs, -no-xorFindSubs                           (default: on)
+  -xorKeepUsed, -no-xorKeepUsed                           (default: on)
+
+  -xorSetPol    = <int32>  [  -1 ..    1] (default: 0)
+  -xorEncSize   = <int32>  [   2 .. imax] (default: 2)
+  -xorBackdoor  = <int32>  [   0 .. imax] (default: 0)
+  -xorSelect    = <int32>  [   0 ..    1] (default: 0)
+  -xorLimit     = <int32>  [   0 .. imax] (default: 1200000)
+  -xorMaxSize   = <int32>  [   3 ..   63] (default: 12)
