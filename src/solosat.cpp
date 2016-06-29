@@ -60,24 +60,31 @@ vector<string> split(string str, char delimiter) {
 int main (int argc, char *argv[])
 {
 	if (argc < 2) {
-		cout << "Usage: ./solosat.exe graph filepath\n";
+		cout << "Usage: ./solosat.exe relPath filepath\n";
 		return -1;
 	}
+	string relPath("");
+	string filePath(argv[1]);
+	if(argc == 3) {
+		relPath = argv[1];
+		filePath = argv[2];
+	}
+  	path graphFile(relPath+filePath);
+	std::ofstream debugo("debug.debug", std::ofstream::out | std::ofstream::trunc);
 
-  	path graphFile (argv[1]);
-
+  	
   	try {
 		if (exists(graphFile)) {
 			if (!is_regular_file(graphFile)) {
-				cout << "Error: Not a valid file\n";
+				debugo << "Error: Not a valid file\n";
 				return -1;
 			}
     	} else {
-    		cout << graphFile << " does not exist\n";
+    		debugo << graphFile << " does not exist\n";
     		return -1;
     	}
   	} catch (const filesystem_error& ex) {
-		cout << ex.what() << '\n';
+		debugo << ex.what() << '\n';
 		return -1;
   	}
 
