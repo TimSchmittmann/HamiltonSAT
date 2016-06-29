@@ -124,6 +124,7 @@ int main (int argc, char *argv[])
 	clauses++;
 	
 	//Necessary? Test it!
+	/*
 	for(unsigned i=2; i<=circlelength-1; i++) {
 		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;			
 		clauses++;
@@ -134,6 +135,7 @@ int main (int argc, char *argv[])
 		ss << '-' << desc_to_comp.at(make_pair(circlelength, v)) << ' ' << 0 << endl;		
 		clauses++;
 	}
+	*/
 	//End test
 
 
