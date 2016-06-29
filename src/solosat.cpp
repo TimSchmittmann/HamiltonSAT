@@ -3,11 +3,9 @@
 // Author      : Tim Schmittmann
 // Version     :
 // Copyright   : Your copyright notice
-// Description : Hello World in C++, Ansi-style
 //============================================================================
 
 #include <iostream>
-#include <fstream>
 #include <sstream>
 #include <string.h>
 #include <vector>
@@ -18,10 +16,23 @@
 #include <math.h>
 #include <ctime>
 #include <chrono>
+#define BOOST_NO_CXX11_SCOPED_ENUMS
+#include <boost/filesystem.hpp>
+#undef BOOST_NO_CXX11_SCOPED_ENUMS
 
+using namespace boost::filesystem;
+using namespace std::chrono;
 using namespace std;
+//using std::cout;
+//using std::string;
+//using std::set;
+//using std::map;
+//using std::bitset;
+//using std::stringstream;
+//using std::vector;
+//using std::pair;
 
-bool debugging_enabled = true;
+bool debugging_enabled = false;
 
 #define DEBUG(x) do { \
   if (debugging_enabled) { std::cerr << x << std::endl; } \
@@ -48,25 +59,59 @@ vector<string> split(string str, char delimiter) {
 
 int main (int argc, char *argv[])
 {
-	if(argc < 1) {
-		return 0;	
+	if (argc < 2) {
+		cout << "Usage: ./solosat.exe graph filepath\n";
+		return -1;
 	}
 
-	chrono::steady_clock::time_point begin = chrono::steady_clock::now();
-	chrono::steady_clock::time_point end= chrono::steady_clock::now();
-	chrono::steady_clock::time_point stop = chrono::steady_clock::now();
-	
-	string root("../../");
-	string solverRoot(root+"solvers/solosat/");
-	string satRoot(solverRoot+"bin/");
-	string solverTmp(solverRoot+"tmp/");
-	string strArg(argv[1]);
-	string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);	
-	
-	string filename = solverTmp+baseFilename+".clauses";
-	
-	ifstream infile(root+argv[1]);
-	ofstream debug(solverTmp+baseFilename+".debug", ofstream::out | ofstream::trunc);	
+  	path graphFile (argv[1]);
+
+  	try {
+		if (exists(graphFile)) {
+			if (!is_regular_file(graphFile)) {
+				cout << "Error: Not a valid file\n";
+				return -1;
+			}
+    	} else {
+    		cout << graphFile << " does not exist\n";
+    		return -1;
+    	}
+  	} catch (const filesystem_error& ex) {
+		cout << ex.what() << '\n';
+		return -1;
+  	}
+
+	steady_clock::time_point begin =steady_clock::now();
+	steady_clock::time_point end=steady_clock::now();
+	steady_clock::time_point stop =steady_clock::now();
+
+	path fullPath(initial_path());
+	DEBUG("fullPath: " << fullPath.string());
+	fullPath = system_complete( path( argv[0] ) );
+	DEBUG("fullPath: " << fullPath.string());
+
+	path solverRoot = fullPath.parent_path();
+
+	//string root("../../");
+	//string solverRoot(root+"solvers/solosat/");
+	path solverTmp(solverRoot / "tmp");
+
+	//string baseFilename = strArg.substr(strArg.find_last_of("/\\") + 1);
+	path baseFile = solverTmp / graphFile.stem();
+	path clausesFile(baseFile.string()+".clauses");
+	path resultsFile(baseFile.string()+".result");
+
+	boost::filesystem::ifstream infile(graphFile);
+	boost::filesystem::ofstream debug(baseFile.string()+".debug", std::ofstream::out | std::ofstream::trunc);
+
+	string satCall(solverRoot.string()+"/bin/riss -config=Riss427 -verb=0 -quiet "+clausesFile.string()+" "+resultsFile.string()+" > /dev/null 2>&1");
+	DEBUG("graphFile: " << graphFile.string());
+	DEBUG("solverRoot: " << solverRoot.string());
+	DEBUG("solverTmp: " << solverTmp.string());
+	DEBUG("baseFile: " << baseFile.string());
+	DEBUG("clausesFile: " << clausesFile.string());
+	DEBUG("resultsFile: " << resultsFile.string());
+
 	//system(("chmod 666 "+solverTmp+baseFilename+".debug").c_str());
 	string line;
 	set<pair<unsigned, unsigned>> edges;
@@ -88,10 +133,10 @@ int main (int argc, char *argv[])
 		}
 
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after parsing (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
+	end=steady_clock::now();
+	debug << "Time after parsing (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
 
 	unsigned clauses = 0;
@@ -109,12 +154,12 @@ int main (int argc, char *argv[])
 			var++;
 		}
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after mapping (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
+	end=steady_clock::now();
+	debug << "Time after mapping (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
-	
+
 	stringstream ss;
 	vector<string> lines;
 
@@ -122,37 +167,36 @@ int main (int argc, char *argv[])
 	ss << "c cond0" << endl;
 	ss << desc_to_comp.at(make_pair(1, 1)) << ' ' << 0 << endl;
 	clauses++;
-	
+
 	//Necessary? Test it!
-	/*
+
 	for(unsigned i=2; i<=circlelength-1; i++) {
-		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;			
+		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;
 		clauses++;
 	}
 	for(unsigned v=2; v<=nodes; v++) {
-		ss << '-' << desc_to_comp.at(make_pair(1, v)) << ' ' << 0 << endl;		
+		ss << '-' << desc_to_comp.at(make_pair(1, v)) << ' ' << 0 << endl;
 		clauses++;
-		ss << '-' << desc_to_comp.at(make_pair(circlelength, v)) << ' ' << 0 << endl;		
+		ss << '-' << desc_to_comp.at(make_pair(circlelength, v)) << ' ' << 0 << endl;
 		clauses++;
 	}
-	*/
+
 	//End test
 
 
 	ss << desc_to_comp.at(make_pair(circlelength, 1)) << ' ' << 0 << endl;
-	
-	clauses++;
-	
-	end= chrono::steady_clock::now();	
-	debug << "Time after cond0 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
 
+	clauses++;
+
+	end=steady_clock::now();
+	debug << "Time after cond0 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	DEBUG("c Clauses " << clauses);	
+	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
 
 	DEBUG("c cond1");
@@ -165,10 +209,10 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after cond1 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
+	end=steady_clock::now();
+	debug << "Time after cond1 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
@@ -187,10 +231,10 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after cond2 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
+	end=steady_clock::now();
+	debug << "Time after cond2 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
@@ -207,10 +251,10 @@ int main (int argc, char *argv[])
 		ss << 0 << endl;
 		clauses++;
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after cond3 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
+	end=steady_clock::now();
+	debug << "Time after cond3 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
 
 	DEBUG("c Clause diff " << clauses-oldclauses);
@@ -229,10 +273,10 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after cond4 (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
+	end=steady_clock::now();
+	debug << "Time after cond4 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
 
 	DEBUG("c Clause diff " << clauses-oldclauses);
@@ -240,6 +284,7 @@ int main (int argc, char *argv[])
 	oldclauses = clauses;
 	DEBUG("c Clauses");
 	ss << "c Clauses " << clauses << endl;
+
 
 	DEBUG("c cond5 ");
 	ss << "c cond5" << endl;
@@ -253,11 +298,11 @@ int main (int argc, char *argv[])
 			}
 		}
 	}
-	end= chrono::steady_clock::now();	
-	debug << "Time after cond5 call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
-	
+	end=steady_clock::now();
+	debug << "Time after cond5 call (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
+
 
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
@@ -280,52 +325,49 @@ int main (int argc, char *argv[])
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
-	DEBUG("c Clauses " << clauses);	
+	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
 */
 	//string filename = root+"tmp/"+argv[1]+".clauses";
-	
-	string resultname = filename+".result";
-	ofstream outfile(filename, ofstream::out | ofstream::trunc);
+
+	boost::filesystem::ofstream outfile(clausesFile, std::ofstream::out | std::ofstream::trunc);
 	//system(("chmod 666 "+filename).c_str());
-	
+
 	//outfile << "p cnf " << nodes*circlelength << ' ' << clauses << endl;
 	outfile << ss.rdbuf();
-	
+
 	outfile.close();
 
-	end= chrono::steady_clock::now();	
-	debug << "Time before solver call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
-	
+	end=steady_clock::now();
+	debug << "Time before solver call (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
 
-	system((satRoot+"riss -config=Riss427 -verb=0 -quiet "+filename+" "+resultname).c_str());
-	
-	end= chrono::steady_clock::now();	
-	debug << "Time after solver call (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " << chrono::duration_cast<std::chrono::milliseconds>(end - begin).count() << endl;
-	stop = chrono::steady_clock::now();
-	
-	
+	system((satCall).c_str());
+
+	end=steady_clock::now();
+	debug << "Time after solver call (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
+
 	DEBUG("finished solving ");
 
-	ifstream resultfile(resultname);
+	boost::filesystem::ifstream resultsstream(resultsFile);
 
-	getline(resultfile, line);
+	getline(resultsstream, line);
 	stringstream firstLine(line);
-	
-	string result;	
-	getline(firstLine, result); 	
+
+	string result;
+	getline(firstLine, result);
 	DEBUG("This is the result: " << result);
 	if(result == "s UNSATISFIABLE") {
 		cout << "s UNSATISFIABLE";
 		return 20;
 	} else if(result == "s SATISFIABLE") {
-	
-		getline(resultfile, line);	
+
+		getline(resultsstream, line);
 		stringstream secondLine(line);
-	
+
 	/*
 		for(std::map<int,pair<unsigned, unsigned>>::iterator 	iter=comp_to_desc.begin(); iter != comp_to_desc.end(); ++iter)
 		{
@@ -348,14 +390,14 @@ int main (int argc, char *argv[])
 				cout << node << ' ';
 				addedNodes++;
 				if(addedNodes == circlelength-1) {
-					break;			
-				}	
+					break;
+				}
 			}
-		} 	
+		}
 
 		return 10;
 	} else {
-		return -1;	
+		return -1;
 	}
 //	for (set<pair<unsigned,unsigned>>::iterator it=edges.begin(); it!=edges.end(); ++it)
 //		 DEBUG("From: " << it->first << " To: " << it->second);
