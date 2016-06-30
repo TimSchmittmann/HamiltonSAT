@@ -125,7 +125,7 @@ int main (int argc, char *argv[])
 	map<pair<unsigned, unsigned>, bool> mappedEdges;
 
 	unsigned nodes;
-	//unsigned nr_of_edges;
+	unsigned nr_of_edges;
 	while (getline(infile, line))
 	{
 		vector<string> tokens = split(line, ' ');
@@ -136,7 +136,7 @@ int main (int argc, char *argv[])
 			mappedEdges.insert(make_pair(p, true));
 		} else if(tokens[0][0] == 'p' && tokens.size() == 4) {
 			nodes = stoul(tokens[2]);
-			//nr_of_edges = stoul(tokens[3]);
+			nr_of_edges = stoul(tokens[3]);
 		}
 
 	}
@@ -160,8 +160,8 @@ int main (int argc, char *argv[])
 //				desc_to_comp.insert(make_pair(make_pair(i,v), stoi(to_string(i)+to_string(v))));
 //				comp_to_desc.insert(make_pair(stoi(to_string(i)+to_string(v)), make_pair(i,v)));
 //			} else {
-				desc_to_comp.insert(make_pair(make_pair(i,v), var));
-				comp_to_desc.insert(make_pair(var, make_pair(i,v)));
+				desc_to_comp[make_pair(i,v)] = var;
+				comp_to_desc[var] = make_pair(i,v);
 //			}
 			var++;
 		}
@@ -209,17 +209,49 @@ int main (int argc, char *argv[])
 	ss << "c Clauses " << clauses << endl;
 
 
-	DEBUG("c cond6 All possible combinations for path pos 2"); //Alle möglichen Kombinationen für path2 = Alle v in  E(1,v)
+	DEBUG("c cond6 All possible combinations for path pos 2"); //All possible combination for path2 = All v in  E(1,v)
 	ss << "c cond6 All possible combinations for path pos 2" << endl;
-	for(unsigned v = 2; v<=nodes; v++) {
-		if(mappedEdges.count(make_pair(1,v))) {
-			ss << desc_to_comp.at(make_pair(2, v)) << ' ';
-		}
-	}
-	ss << 0 << endl;
-	clauses++;
+	double avg_edges = nodes / nr_of_edges;
+	unsigned nr_of_runs = (unsigned)floor(log(100000)/log(avg_edges));
+	DEBUG("Number of runs: " << nr_of_runs);
+	map<unsigned, set<unsigned>> nodeCandidates;
+	nodeCandidates[1] = set<unsigned>();
+	map<unsigned, set<unsigned>> tempCandidates;
 
-	DEBUG("c cond7 All possible combinations for path pos last"); //Alle möglichen Kombinationen für pathLast = Alle v in  E(v, 1)
+	for(unsigned i = 1; i<=min(nr_of_runs, circlelength-2); ++i) {
+		for(auto nodeIter = nodeCandidates.begin(); nodeIter != nodeCandidates.end(); ++nodeIter) {
+			for(unsigned w = 2; w<=nodes; w++) {
+				//NodeIter->second contains set with all previous nodes+node itself to avoid loops
+				if(!nodeIter->second.count(w) && mappedEdges.count(make_pair(nodeIter->first,w))) {
+					DEBUG("Adding pair: " << (i+1) << w);
+					ss << desc_to_comp.at(make_pair(i+1, w)) << ' ';
+					if(tempCandidates.count(w)) {
+						tempCandidates[w].insert(nodeIter->second.begin(), nodeIter->second.end());
+					} else {
+						tempCandidates[w] = nodeIter->second;
+					}
+					tempCandidates[w].insert(w);
+				}
+			}
+		}
+		ss << 0 << endl;
+		clauses++;
+		nodeCandidates = tempCandidates;
+		tempCandidates.empty();
+	}
+
+
+//	for(unsigned v = 2; v<=nodes; v++) {
+//		if(mappedEdges.count(make_pair(1,v))) {
+//			ss << desc_to_comp.at(make_pair(2, v)) << ' ';
+//		}
+//	}
+//	ss << 0 << endl;
+//	clauses++;
+
+
+
+	DEBUG("c cond7 All possible combinations for path pos last"); //Alle mÃ¶glichen Kombinationen fÃ¼r pathLast = Alle v in  E(v, 1)
 	ss << "c cond7 All possible combinations for path pos last" << endl;
 	for(unsigned v = 2; v<=nodes; v++) {
 		if(mappedEdges.count(make_pair(v, 1))) {
