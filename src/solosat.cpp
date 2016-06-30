@@ -32,7 +32,7 @@ using namespace std;
 //using std::vector;
 //using std::pair;
 
-bool debugging_enabled = false;
+bool debugging_enabled = true;
 
 #define DEBUG(x) do { \
   if (debugging_enabled) { std::cerr << x << std::endl; } \
@@ -72,7 +72,7 @@ int main (int argc, char *argv[])
   	path graphFile(relPath+filePath);
 	std::ofstream debugo("debug.debug", std::ofstream::out | std::ofstream::trunc);
 
-  	
+
   	try {
 		if (exists(graphFile)) {
 			if (!is_regular_file(graphFile)) {
@@ -156,8 +156,13 @@ int main (int argc, char *argv[])
 	int var=1;
 	for(unsigned i=1; i<=circlelength; i++) {
 		for(unsigned v=1; v<=nodes; v++) {
-			desc_to_comp.insert(make_pair(make_pair(i,v), var));
-			comp_to_desc.insert(make_pair(var, make_pair(i,v)));
+//			if(debugging_enabled) {
+//				desc_to_comp.insert(make_pair(make_pair(i,v), stoi(to_string(i)+to_string(v))));
+//				comp_to_desc.insert(make_pair(stoi(to_string(i)+to_string(v)), make_pair(i,v)));
+//			} else {
+				desc_to_comp.insert(make_pair(make_pair(i,v), var));
+				comp_to_desc.insert(make_pair(var, make_pair(i,v)));
+//			}
 			var++;
 		}
 	}
@@ -170,45 +175,149 @@ int main (int argc, char *argv[])
 	stringstream ss;
 	vector<string> lines;
 
-	DEBUG("cond0 ");
-	ss << "c cond0" << endl;
+	DEBUG("cond0 set start and end of path");
+	ss << "c cond0 set start and end of path" << endl;
+
 	ss << desc_to_comp.at(make_pair(1, 1)) << ' ' << 0 << endl;
 	clauses++;
-
 	//Necessary? Test it!
 
-	for(unsigned i=2; i<=circlelength-1; i++) {
-		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;
-		clauses++;
-	}
-	for(unsigned v=2; v<=nodes; v++) {
-		ss << '-' << desc_to_comp.at(make_pair(1, v)) << ' ' << 0 << endl;
-		clauses++;
-		ss << '-' << desc_to_comp.at(make_pair(circlelength, v)) << ' ' << 0 << endl;
-		clauses++;
-	}
+//	for(unsigned i=2; i<=circlelength-1; i++) {
+//		ss << '-' << desc_to_comp.at(make_pair(i, 1)) << ' ' << 0 << endl;
+//		clauses++;
+//	}
+//	for(unsigned v=2; v<=nodes; v++) {
+//		ss << '-' << desc_to_comp.at(make_pair(1, v)) << ' ' << 0 << endl;
+//		clauses++;
+//		ss << '-' << desc_to_comp.at(make_pair(circlelength, v)) << ' ' << 0 << endl;
+//		clauses++;
+//	}
 
 	//End test
 
-
 	ss << desc_to_comp.at(make_pair(circlelength, 1)) << ' ' << 0 << endl;
-
 	clauses++;
 
 	end=steady_clock::now();
 	debug << "Time after cond0 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
 	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
 	stop =steady_clock::now();
-
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
 	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
 
-	DEBUG("c cond1");
 
-	ss << "c cond1" << endl;
+	DEBUG("c cond6 All possible combinations for path pos 2"); //Alle möglichen Kombinationen für path2 = Alle v in  E(1,v)
+	ss << "c cond6 All possible combinations for path pos 2" << endl;
+	for(unsigned v = 2; v<=nodes; v++) {
+		if(mappedEdges.count(make_pair(1,v))) {
+			ss << desc_to_comp.at(make_pair(2, v)) << ' ';
+		}
+	}
+	ss << 0 << endl;
+	clauses++;
+
+	DEBUG("c cond7 All possible combinations for path pos last"); //Alle möglichen Kombinationen für pathLast = Alle v in  E(v, 1)
+	ss << "c cond7 All possible combinations for path pos last" << endl;
+	for(unsigned v = 2; v<=nodes; v++) {
+		if(mappedEdges.count(make_pair(v, 1))) {
+			ss << desc_to_comp.at(make_pair(circlelength-1, v)) << ' ';
+		}
+	}
+	ss << 0 << endl;
+	clauses++;
+
+//
+//	debug << "Time after cond6 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+//	end=steady_clock::now();
+//	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+//	stop =steady_clock::now();
+//	DEBUG("c Clause diff " << clauses-oldclauses);
+//	ss << "c Clause diff " << clauses-oldclauses << endl;
+//	oldclauses = clauses;
+//	DEBUG("c Clauses");
+//	ss << "c Clauses " << clauses << endl;
+
+
+	DEBUG("c cond5 paths that have no corresponding edges not allowed");
+	ss << "c cond5 paths that have no corresponding edges not allowed" << endl;
+	for(unsigned w = 2; w<=nodes; w++) {
+		if(!mappedEdges.count(make_pair(1,w))) {
+			ss << '-' << desc_to_comp.at(make_pair(2, w)) << ' ' << 0 << endl;
+			clauses++;
+		} else if (!mappedEdges.count(make_pair(w,1))) {
+			ss << '-' << desc_to_comp.at(make_pair(circlelength-1, w)) << ' ' << 0 << endl;
+
+		}
+	}
+
+	for(unsigned v = 2; v<=nodes; v++) {
+		for(unsigned w = 2; w<=nodes; w++) {
+			if(v != w && !mappedEdges.count(make_pair(v,w))) {
+				for(unsigned i = 2; i<=circlelength-2; i++) {
+					ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(i+1, w)) << ' ' << 0 << endl;
+					clauses++;
+				}
+			}
+		}
+	}
+	end=steady_clock::now();
+	debug << "Time after cond5 call (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
+	DEBUG("c Clause diff " << clauses-oldclauses);
+	ss << "c Clause diff " << clauses-oldclauses << endl;
+	oldclauses = clauses;
+	DEBUG("c Clauses " << clauses);
+	ss << "c Clauses " << clauses << endl;
+
+
+	DEBUG("c cond3 Each path is set");
+	ss << "c cond3 Each path is set" << endl;
+	for(unsigned i = 2; i<=circlelength-1; i++) {
+		for(unsigned v = 2; v<=nodes; v++) {
+			ss << desc_to_comp.at(make_pair(i, v)) << ' ';
+		}
+		ss << 0 << endl;
+		clauses++;
+	}
+	end=steady_clock::now();
+	debug << "Time after cond3 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
+	DEBUG("c Clause diff " << clauses-oldclauses);
+	ss << "c Clause diff " << clauses-oldclauses << endl;
+	oldclauses = clauses;
+	DEBUG("c Clauses");
+	ss << "c Clauses " << clauses << endl;
+
+
+	DEBUG("c cond4 Each path is set by exactly one node");
+	ss << "c cond4 Each path is set by exactly one node" << endl;
+	for(unsigned i = 2; i<=circlelength-1; i++) {
+		for(unsigned v = 2; v<=nodes-1; v++) {
+			for(unsigned w = v+1; w<=nodes; w++) {
+				ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(i, w)) << ' ' << 0 << endl;
+				clauses++;
+			}
+		}
+	}
+	end=steady_clock::now();
+	debug << "Time after cond4 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
+	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
+	stop =steady_clock::now();
+	DEBUG("c Clause diff " << clauses-oldclauses);
+	ss << "c Clause diff " << clauses-oldclauses << endl;
+	oldclauses = clauses;
+	DEBUG("c Clauses");
+	ss << "c Clauses " << clauses << endl;
+
+
+	DEBUG("c cond1 Each node appears");
+
+	ss << "c cond1 Each node appears" << endl;
 	for(unsigned v = 2; v<=nodes; v++) {
 		for(unsigned i = 2; i<=circlelength-1; i++) {
 			ss << desc_to_comp.at(make_pair(i, v)) << ' ';
@@ -220,15 +329,15 @@ int main (int argc, char *argv[])
 	debug << "Time after cond1 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
 	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
 	stop =steady_clock::now();
-
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
 	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
 
-	DEBUG("c cond2");
-	ss << "c cond2" << endl;
+
+	DEBUG("c cond2 Each node appears exactly once");
+	ss << "c cond2 Each node appears exactly once" << endl;
 
 	for(unsigned v = 2; v<=nodes; v++) {
 		for(unsigned i = 2; i<=circlelength-2; i++) {
@@ -242,100 +351,11 @@ int main (int argc, char *argv[])
 	debug << "Time after cond2 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
 	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
 	stop =steady_clock::now();
-
 	DEBUG("c Clause diff " << clauses-oldclauses);
 	ss << "c Clause diff " << clauses-oldclauses << endl;
 	oldclauses = clauses;
 	DEBUG("c Clauses " << clauses);
 	ss << "c Clauses " << clauses << endl;
-
-	DEBUG("c cond3 ");
-	ss << "c cond3" << endl;
-	for(unsigned i = 2; i<=circlelength-1; i++) {
-		for(unsigned v = 2; v<=nodes; v++) {
-			ss << desc_to_comp.at(make_pair(i, v)) << ' ';
-		}
-		ss << 0 << endl;
-		clauses++;
-	}
-	end=steady_clock::now();
-	debug << "Time after cond3 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
-	stop =steady_clock::now();
-
-
-	DEBUG("c Clause diff " << clauses-oldclauses);
-	ss << "c Clause diff " << clauses-oldclauses << endl;
-	oldclauses = clauses;
-	DEBUG("c Clauses");
-	ss << "c Clauses " << clauses << endl;
-
-	DEBUG("c cond4 ");
-	ss << "c cond4" << endl;
-	for(unsigned i = 2; i<=circlelength-1; i++) {
-		for(unsigned v = 2; v<=nodes-1; v++) {
-			for(unsigned w = v+1; w<=nodes; w++) {
-				ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(i, w)) << ' ' << 0 << endl;
-				clauses++;
-			}
-		}
-	}
-	end=steady_clock::now();
-	debug << "Time after cond4 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
-	stop =steady_clock::now();
-
-
-	DEBUG("c Clause diff " << clauses-oldclauses);
-	ss << "c Clause diff " << clauses-oldclauses << endl;
-	oldclauses = clauses;
-	DEBUG("c Clauses");
-	ss << "c Clauses " << clauses << endl;
-
-
-	DEBUG("c cond5 ");
-	ss << "c cond5" << endl;
-	for(unsigned v = 1; v<=nodes; v++) {
-		for(unsigned w = 1; w<=nodes; w++) {
-			if(!mappedEdges.count(make_pair(v,w))) {
-				for(unsigned i = 1; i<=circlelength-1; i++) {
-					ss << '-' << desc_to_comp.at(make_pair(i, v)) << ' ' << '-' << desc_to_comp.at(make_pair(i+1, w)) << ' ' << 0 << endl;
-					clauses++;
-				}
-			}
-		}
-	}
-	end=steady_clock::now();
-	debug << "Time after cond5 call (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
-	debug << "Total time (ms): " <<duration_cast<milliseconds>(end - begin).count() << endl;
-	stop =steady_clock::now();
-
-
-	DEBUG("c Clause diff " << clauses-oldclauses);
-	ss << "c Clause diff " << clauses-oldclauses << endl;
-	oldclauses = clauses;
-	DEBUG("c Clauses " << clauses);
-	ss << "c Clauses " << clauses << endl;
-
-	/*
-	DEBUG("c cond6");
-
-	ss << "c cond6" << endl;
-	for(unsigned i=0; i<pow(2, nodes); i++) {
-		for(unsigned v=1; v<=nodes; v++) {
-			unsigned pos = (((i >> (v-1)) & 1) ? circlelength : 1);
-			ss << desc_to_comp.at(make_pair(pos, v)) << ' ';
-		}
-		ss << 0 << endl;
-		clauses++;
-	}
-	DEBUG("c Clause diff " << clauses-oldclauses);
-	ss << "c Clause diff " << clauses-oldclauses << endl;
-	oldclauses = clauses;
-	DEBUG("c Clauses " << clauses);
-	ss << "c Clauses " << clauses << endl;
-*/
-	//string filename = root+"tmp/"+argv[1]+".clauses";
 
 	boost::filesystem::ofstream outfile(clausesFile, std::ofstream::out | std::ofstream::trunc);
 	//system(("chmod 666 "+filename).c_str());
@@ -393,7 +413,8 @@ int main (int argc, char *argv[])
 			}
 			if(result.c_str()[0] != '-') {
 	//			string node = result.substr(result.find(to_string(addedNodes+1))+1);
-				int node = comp_to_desc.at(atoi(result.c_str())).second;
+				DEBUG("Var:" << result << " parsed: "<< comp_to_desc.at(stoi(result)).first << comp_to_desc.at(stoi(result)).second);
+				int node = comp_to_desc.at(stoi(result)).second;
 				cout << node << ' ';
 				addedNodes++;
 				if(addedNodes == circlelength-1) {
