@@ -1,0 +1,548 @@
+fullPath: /home/furio/HamiltonSAT
+fullPath: /home/furio/HamiltonSAT/./solvers/solosat/solosat.exe
+graphFile: graphs/hc-12.col
+solverRoot: /home/furio/HamiltonSAT/./solvers/solosat
+solverTmp: /home/furio/HamiltonSAT/./solvers/solosat/tmp
+baseFile: /home/furio/HamiltonSAT/./solvers/solosat/tmp/hc-12
+clausesFile: /home/furio/HamiltonSAT/./solvers/solosat/tmp/hc-12.clauses
+resultsFile: /home/furio/HamiltonSAT/./solvers/solosat/tmp/hc-12.result
+cond0 set start and end of path
+c Clause diff 2
+c Clauses 2
+c cond6 All possible combinations for path pos beginning from start
+Nodes: 12
+ Nr of edges: 36
+Avg edges: 3
+Number of runs: 10
+i+12
+Adding node: 8
+Inside nodeIter->second
+
+Inside tempCandidates
+ 8
+Adding node: 10
+Inside nodeIter->second
+
+Inside tempCandidates
+ 8 10
+Adding node: 11
+Inside nodeIter->second
+
+Inside tempCandidates
+ 8 10 11
+i+13
+Adding node: 4
+Inside nodeIter->second
+ 8
+Inside tempCandidates
+ 4
+Adding node: 9
+Inside nodeIter->second
+ 8
+Inside tempCandidates
+ 4 9
+Adding node: 10
+Inside nodeIter->second
+ 8
+Inside tempCandidates
+ 4 9 10
+Adding node: 8
+Inside nodeIter->second
+ 10
+Inside tempCandidates
+ 4 8 9 10
+Adding node: 6
+Inside nodeIter->second
+ 11
+Inside tempCandidates
+ 4 6 8 9 10
+Adding node: 7
+Inside nodeIter->second
+ 11
+Inside tempCandidates
+ 4 6 7 8 9 10
+i+14
+Adding node: 2
+Inside nodeIter->second
+ 8 4
+Inside tempCandidates
+ 2
+Adding node: 3
+Inside nodeIter->second
+ 8 4
+Inside tempCandidates
+ 2 3
+Adding node: 7
+Inside nodeIter->second
+ 11 6
+Inside tempCandidates
+ 2 3 7
+Adding node: 5
+Inside nodeIter->second
+ 11 7
+Inside tempCandidates
+ 2 3 5 7
+Adding node: 12
+Inside nodeIter->second
+ 11 7
+Inside tempCandidates
+ 2 3 5 7 12
+Adding node: 4
+Inside nodeIter->second
+ 10 8
+Inside tempCandidates
+ 2 3 4 5 7 12
+Adding node: 9
+Inside nodeIter->second
+ 10 8
+Inside tempCandidates
+ 2 3 4 5 7 9 12
+Adding node: 3
+Inside nodeIter->second
+ 8 9
+Inside tempCandidates
+ 2 3 4 5 7 9 12
+i+15
+Adding node: 6
+Inside nodeIter->second
+ 8 4 2
+Inside tempCandidates
+ 6
+Adding node: 10
+Inside nodeIter->second
+ 8 9 3
+Inside tempCandidates
+ 6 10
+Adding node: 11
+Inside nodeIter->second
+ 8 9 3
+Inside tempCandidates
+ 6 10 11
+Adding node: 2
+Inside nodeIter->second
+ 10 8 4
+Inside tempCandidates
+ 2 6 10 11
+Adding node: 3
+Inside nodeIter->second
+ 10 8 4
+Inside tempCandidates
+ 2 3 6 10 11
+Adding node: 3
+Inside nodeIter->second
+ 11 7 5
+Inside tempCandidates
+ 2 3 6 10 11
+Adding node: 8
+Inside nodeIter->second
+ 11 7 5
+Inside tempCandidates
+ 2 3 6 8 10 11
+Adding node: 12
+Inside nodeIter->second
+ 11 7 5
+Inside tempCandidates
+ 2 3 6 8 10 11 12
+Adding node: 5
+Inside nodeIter->second
+ 11 6 7
+Inside tempCandidates
+ 2 3 5 6 8 10 11 12
+Adding node: 12
+Inside nodeIter->second
+ 11 6 7
+Inside tempCandidates
+ 2 3 5 6 8 10 11 12
+Adding node: 3
+Inside nodeIter->second
+ 10 8 9
+Inside tempCandidates
+ 2 3 5 6 8 10 11 12
+Adding node: 4
+Inside nodeIter->second
+ 11 7 12
+Inside tempCandidates
+ 2 3 4 5 6 8 10 11 12
+Adding node: 6
+Inside nodeIter->second
+ 11 7 12
+Inside tempCandidates
+ 2 3 4 5 6 8 10 11 12
+i+16
+Adding node: 6
+Inside nodeIter->second
+ 10 8 4 2
+Inside tempCandidates
+ 6
+Adding node: 11
+Inside nodeIter->second
+ 10 8 9 3
+Inside tempCandidates
+ 6 11
+Adding node: 2
+Inside nodeIter->second
+ 11 7 12 4
+Inside tempCandidates
+ 2 6 11
+Adding node: 3
+Inside nodeIter->second
+ 11 7 12 4
+Inside tempCandidates
+ 2 3 6 11
+Adding node: 8
+Inside nodeIter->second
+ 11 7 12 4
+Inside tempCandidates
+ 2 3 6 8 11
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 5
+Inside tempCandidates
+ 2 3 6 8 11
+Adding node: 8
+Inside nodeIter->second
+ 11 6 7 5
+Inside tempCandidates
+ 2 3 6 8 11
+Adding node: 12
+Inside nodeIter->second
+ 11 6 7 5
+Inside tempCandidates
+ 2 3 6 8 11 12
+Adding node: 4
+Inside nodeIter->second
+ 11 7 5 8
+Inside tempCandidates
+ 2 3 4 6 8 11 12
+Adding node: 9
+Inside nodeIter->second
+ 11 7 5 8
+Inside tempCandidates
+ 2 3 4 6 8 9 11 12
+Adding node: 10
+Inside nodeIter->second
+ 11 7 5 8
+Inside tempCandidates
+ 2 3 4 6 8 9 10 11 12
+Adding node: 6
+Inside nodeIter->second
+ 8 9 3 11
+Inside tempCandidates
+ 2 3 4 6 8 9 10 11 12
+Adding node: 7
+Inside nodeIter->second
+ 8 9 3 11
+Inside tempCandidates
+ 2 3 4 6 7 8 9 10 11 12
+Adding node: 4
+Inside nodeIter->second
+ 11 6 7 12
+Inside tempCandidates
+ 2 3 4 6 7 8 9 10 11 12
+i+17
+Adding node: 6
+Inside nodeIter->second
+ 11 7 12 4 2
+Inside tempCandidates
+ 6
+Adding node: 8
+Inside nodeIter->second
+ 11 7 12 4 2
+Inside tempCandidates
+ 6 8
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 5 3
+Inside tempCandidates
+ 6 8 10
+Adding node: 2
+Inside nodeIter->second
+ 11 6 7 12 4
+Inside tempCandidates
+ 2 6 8 10
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 12 4
+Inside tempCandidates
+ 2 3 6 8 10
+Adding node: 8
+Inside nodeIter->second
+ 11 6 7 12 4
+Inside tempCandidates
+ 2 3 6 8 10
+Adding node: 7
+Inside nodeIter->second
+ 8 9 3 11 6
+Inside tempCandidates
+ 2 3 6 7 8 10
+Adding node: 5
+Inside nodeIter->second
+ 8 9 3 11 7
+Inside tempCandidates
+ 2 3 5 6 7 8 10
+Adding node: 12
+Inside nodeIter->second
+ 8 9 3 11 7
+Inside tempCandidates
+ 2 3 5 6 7 8 10 12
+Adding node: 4
+Inside nodeIter->second
+ 11 6 7 5 8
+Inside tempCandidates
+ 2 3 4 5 6 7 8 10 12
+Adding node: 9
+Inside nodeIter->second
+ 11 6 7 5 8
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 5 8
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+Adding node: 3
+Inside nodeIter->second
+ 11 7 5 8 9
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+Adding node: 6
+Inside nodeIter->second
+ 10 8 9 3 11
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+Adding node: 7
+Inside nodeIter->second
+ 10 8 9 3 11
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+Adding node: 4
+Inside nodeIter->second
+ 11 6 7 5 12
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+i+18
+Adding node: 8
+Inside nodeIter->second
+ 11 6 7 12 4 2
+Inside tempCandidates
+ 8
+Adding node: 10
+Inside nodeIter->second
+ 11 7 5 8 9 3
+Inside tempCandidates
+ 8 10
+Adding node: 2
+Inside nodeIter->second
+ 11 6 7 5 12 4
+Inside tempCandidates
+ 2 8 10
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 5 12 4
+Inside tempCandidates
+ 2 3 8 10
+Adding node: 8
+Inside nodeIter->second
+ 11 6 7 5 12 4
+Inside tempCandidates
+ 2 3 8 10
+Adding node: 12
+Inside nodeIter->second
+ 8 9 3 11 7 5
+Inside tempCandidates
+ 2 3 8 10 12
+Adding node: 7
+Inside nodeIter->second
+ 10 8 9 3 11 6
+Inside tempCandidates
+ 2 3 7 8 10 12
+Adding node: 5
+Inside nodeIter->second
+ 10 8 9 3 11 7
+Inside tempCandidates
+ 2 3 5 7 8 10 12
+Adding node: 12
+Inside nodeIter->second
+ 10 8 9 3 11 7
+Inside tempCandidates
+ 2 3 5 7 8 10 12
+Adding node: 9
+Inside nodeIter->second
+ 11 6 7 12 4 8
+Inside tempCandidates
+ 2 3 5 7 8 9 10 12
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 12 4 8
+Inside tempCandidates
+ 2 3 5 7 8 9 10 12
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 5 8 9
+Inside tempCandidates
+ 2 3 5 7 8 9 10 12
+Adding node: 4
+Inside nodeIter->second
+ 8 9 3 11 7 12
+Inside tempCandidates
+ 2 3 4 5 7 8 9 10 12
+Adding node: 6
+Inside nodeIter->second
+ 8 9 3 11 7 12
+Inside tempCandidates
+ 2 3 4 5 6 7 8 9 10 12
+i+19
+Adding node: 8
+Inside nodeIter->second
+ 11 6 7 5 12 4 2
+Inside tempCandidates
+ 8
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 5 8 9 3
+Inside tempCandidates
+ 8 10
+Adding node: 2
+Inside nodeIter->second
+ 8 9 3 11 7 12 4
+Inside tempCandidates
+ 2 8 10
+Adding node: 12
+Inside nodeIter->second
+ 10 8 9 3 11 7 5
+Inside tempCandidates
+ 2 8 10 12
+Adding node: 5
+Inside nodeIter->second
+ 10 8 9 3 11 6 7
+Inside tempCandidates
+ 2 5 8 10 12
+Adding node: 12
+Inside nodeIter->second
+ 10 8 9 3 11 6 7
+Inside tempCandidates
+ 2 5 8 10 12
+Adding node: 9
+Inside nodeIter->second
+ 11 6 7 5 12 4 8
+Inside tempCandidates
+ 2 5 8 9 10 12
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 5 12 4 8
+Inside tempCandidates
+ 2 5 8 9 10 12
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 12 4 8 9
+Inside tempCandidates
+ 2 3 5 8 9 10 12
+Adding node: 4
+Inside nodeIter->second
+ 10 8 9 3 11 7 12
+Inside tempCandidates
+ 2 3 4 5 8 9 10 12
+Adding node: 6
+Inside nodeIter->second
+ 10 8 9 3 11 7 12
+Inside tempCandidates
+ 2 3 4 5 6 8 9 10 12
+i+110
+Adding node: 6
+Inside nodeIter->second
+ 8 9 3 11 7 12 4 2
+Inside tempCandidates
+ 6
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 12 4 8 9 3
+Inside tempCandidates
+ 6 10
+Adding node: 2
+Inside nodeIter->second
+ 10 8 9 3 11 7 12 4
+Inside tempCandidates
+ 2 6 10
+Adding node: 12
+Inside nodeIter->second
+ 10 8 9 3 11 6 7 5
+Inside tempCandidates
+ 2 6 10 12
+Adding node: 9
+Inside nodeIter->second
+ 11 6 7 5 12 4 2 8
+Inside tempCandidates
+ 2 6 9 10 12
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 5 12 4 2 8
+Inside tempCandidates
+ 2 6 9 10 12
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 5 12 4 8 9
+Inside tempCandidates
+ 2 3 6 9 10 12
+Adding node: 4
+Inside nodeIter->second
+ 10 8 9 3 11 6 7 12
+Inside tempCandidates
+ 2 3 4 6 9 10 12
+i+111
+Adding node: 6
+Inside nodeIter->second
+ 10 8 9 3 11 7 12 4 2
+Inside tempCandidates
+ 6
+Adding node: 10
+Inside nodeIter->second
+ 11 6 7 5 12 4 8 9 3
+Inside tempCandidates
+ 6 10
+Adding node: 2
+Inside nodeIter->second
+ 10 8 9 3 11 6 7 12 4
+Inside tempCandidates
+ 2 6 10
+Adding node: 3
+Inside nodeIter->second
+ 11 6 7 5 12 4 2 8 9
+Inside tempCandidates
+ 2 3 6 10
+Adding node: 4
+Inside nodeIter->second
+ 10 8 9 3 11 6 7 5 12
+Inside tempCandidates
+ 2 3 4 6 10
+c cond7 All possible combinations for path pos last
+c cond5 paths that have no corresponding edges not allowed
+c Clause diff 879
+c Clauses 881
+c cond3 Each path is set
+c Clause diff 11
+c Clauses
+c cond4 Each path is set by exactly one node
+c Clause diff 605
+c Clauses
+c cond1 Each node appears
+c Clause diff 11
+c Clauses 1508
+c cond2 Each node appears exactly once
+c Clause diff 605
+c Clauses 2113
+finished solving 
+This is the result: s SATISFIABLE
+s SATISFIABLE
+v Var:1 parsed: 11
+1 Var:22 parsed: 210
+10 Var:32 parsed: 38
+8 Var:45 parsed: 49
+9 Var:51 parsed: 53
+3 Var:71 parsed: 611
+11 Var:79 parsed: 77
+7 Var:89 parsed: 85
+5 Var:108 parsed: 912
+12 Var:112 parsed: 104
+4 Var:122 parsed: 112
+2 Var:138 parsed: 126
+6 

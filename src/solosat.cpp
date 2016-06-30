@@ -15,6 +15,7 @@
 #include <bitset>
 #include <math.h>
 #include <ctime>
+#include <algorithm>
 #include <chrono>
 #define BOOST_NO_CXX11_SCOPED_ENUMS
 #include "boost/filesystem.hpp"
@@ -160,7 +161,7 @@ int main (int argc, char *argv[])
 //				desc_to_comp.insert(make_pair(make_pair(i,v), stoi(to_string(i)+to_string(v))));
 //				comp_to_desc.insert(make_pair(stoi(to_string(i)+to_string(v)), make_pair(i,v)));
 //			} else {
-				desc_to_comp[make_pair(i,v)] = var;
+				desc_to_comp[make_pair(i,v)] = var;//stoi(to_string(i)+to_string(v)); //var;
 				comp_to_desc[var] = make_pair(i,v);
 //			}
 			var++;
@@ -209,35 +210,47 @@ int main (int argc, char *argv[])
 	ss << "c Clauses " << clauses << endl;
 
 
-	DEBUG("c cond6 All possible combinations for path pos 2"); //All possible combination for path2 = All v in  E(1,v)
-	ss << "c cond6 All possible combinations for path pos 2" << endl;
-	double avg_edges = nodes / nr_of_edges;
+	DEBUG("c cond6 All possible combinations for path pos beginning from start"); //All possible combination for path2 = All v in  E(1,v)
+	ss << "c cond6 All possible combinations for path pos beginning from start" << endl;
+	double avg_edges = nr_of_edges / nodes;
+	DEBUG("Nodes: " << nodes);
+	DEBUG(" Nr of edges: " << nr_of_edges);
+	DEBUG("Avg edges: " << avg_edges);
 	unsigned nr_of_runs = (unsigned)floor(log(100000)/log(avg_edges));
+	nr_of_runs = floor(min(nr_of_runs, circlelength/2));
 	DEBUG("Number of runs: " << nr_of_runs);
-	map<unsigned, set<unsigned>> nodeCandidates;
-	nodeCandidates[1] = set<unsigned>();
-	map<unsigned, set<unsigned>> tempCandidates;
+	map<unsigned, vector<unsigned>> nodeCandidates;
+	nodeCandidates[1] = vector<unsigned>();
+	map<unsigned, vector<unsigned>> tempCandidates;
 
-	for(unsigned i = 1; i<=min(nr_of_runs, circlelength-2); ++i) {
+	for(unsigned i = 2; i<=nr_of_runs; ++i) {
+		DEBUG("i" << i);
 		for(auto nodeIter = nodeCandidates.begin(); nodeIter != nodeCandidates.end(); ++nodeIter) {
 			for(unsigned w = 2; w<=nodes; w++) {
 				//NodeIter->second contains set with all previous nodes+node itself to avoid loops
-				if(!nodeIter->second.count(w) && mappedEdges.count(make_pair(nodeIter->first,w))) {
-					DEBUG("Adding pair: " << (i+1) << w);
-					ss << desc_to_comp.at(make_pair(i+1, w)) << ' ';
-					if(tempCandidates.count(w)) {
-						tempCandidates[w].insert(nodeIter->second.begin(), nodeIter->second.end());
-					} else {
-						tempCandidates[w] = nodeIter->second;
-					}
-					tempCandidates[w].insert(w);
+				if(find(nodeIter->second.begin(), nodeIter->second.end(), w) == nodeIter->second.end() && mappedEdges.count(make_pair(nodeIter->first,w))) {
+					DEBUG("Adding node: " << w);
+					DEBUG("Inside nodeIter->second");
+//					for(auto iter = nodeIter->second.begin(); iter != nodeIter->second.end(); ++iter) {
+//						std::cout << " " << *iter;
+//					}
+					DEBUG("");
+					ss << desc_to_comp.at(make_pair(i, w)) << ' ';
+					tempCandidates[w] = nodeIter->second;
+					tempCandidates[w].push_back(w);
+
+					DEBUG("Inside tempCandidates");
+//					for(auto iter = tempCandidates.begin(); iter != tempCandidates.end(); ++iter) {
+//						std::cout << " " << iter->first;
+//					}
+					DEBUG("");
 				}
 			}
 		}
 		ss << 0 << endl;
 		clauses++;
 		nodeCandidates = tempCandidates;
-		tempCandidates.empty();
+		tempCandidates.clear();
 	}
 
 
@@ -251,15 +264,49 @@ int main (int argc, char *argv[])
 
 
 
-	DEBUG("c cond7 All possible combinations for path pos last"); //Alle mÃ¶glichen Kombinationen fÃ¼r pathLast = Alle v in  E(v, 1)
-	ss << "c cond7 All possible combinations for path pos last" << endl;
-	for(unsigned v = 2; v<=nodes; v++) {
-		if(mappedEdges.count(make_pair(v, 1))) {
-			ss << desc_to_comp.at(make_pair(circlelength-1, v)) << ' ';
+	DEBUG("c cond7 All possible combinations from path pos last"); //All possible combination for path2 = All v in  E(v, 1)
+	ss << "c cond7 All possible combinations from path pos last" << endl;
+	nodeCandidates.clear();
+	nodeCandidates[1] = vector<unsigned>();
+	tempCandidates.clear();
+
+	for(unsigned i = circlelength-1; i>=circlelength-nr_of_runs; --i) {
+		DEBUG("i" << i);
+		for(auto nodeIter = nodeCandidates.begin(); nodeIter != nodeCandidates.end(); ++nodeIter) {
+			for(unsigned w = 2; w<=nodes; w++) {
+				//NodeIter->second contains set with all previous nodes+node itself to avoid loops
+				if(find(nodeIter->second.begin(), nodeIter->second.end(), w) == nodeIter->second.end() && mappedEdges.count(make_pair(w, nodeIter->first))) {
+					DEBUG("Adding node: " << w);
+					DEBUG("Inside nodeIter->second");
+//					for(auto iter = nodeIter->second.begin(); iter != nodeIter->second.end(); ++iter) {
+//						std::cout << " " << *iter;
+//					}
+					DEBUG("");
+					ss << desc_to_comp.at(make_pair(i, w)) << ' ';
+					tempCandidates[w] = nodeIter->second;
+					tempCandidates[w].push_back(w);
+
+					DEBUG("Inside tempCandidates");
+//					for(auto iter = tempCandidates.begin(); iter != tempCandidates.end(); ++iter) {
+//						std::cout << " " << iter->first;
+//					}
+					DEBUG("");
+				}
+			}
 		}
+		ss << 0 << endl;
+		clauses++;
+		nodeCandidates = tempCandidates;
+		tempCandidates.clear();
 	}
-	ss << 0 << endl;
-	clauses++;
+
+//	for(unsigned v = 2; v<=nodes; v++) {
+//		if(mappedEdges.count(make_pair(v, 1))) {
+//			ss << desc_to_comp.at(make_pair(circlelength-1, v)) << ' ';
+//		}
+//	}
+//	ss << 0 << endl;
+//	clauses++;
 
 //
 //	debug << "Time after cond6 (ms): " <<duration_cast<milliseconds>(end - stop).count() << endl;
@@ -308,7 +355,7 @@ int main (int argc, char *argv[])
 
 	DEBUG("c cond3 Each path is set");
 	ss << "c cond3 Each path is set" << endl;
-	for(unsigned i = 2; i<=circlelength-1; i++) {
+	for(unsigned i = nr_of_runs+1; i<=circlelength-nr_of_runs-1; i++) {
 		for(unsigned v = 2; v<=nodes; v++) {
 			ss << desc_to_comp.at(make_pair(i, v)) << ' ';
 		}
